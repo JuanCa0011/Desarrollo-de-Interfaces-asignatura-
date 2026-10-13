@@ -16,3 +16,10 @@ total: number;
 skip: number;
 limit: number;
 }
+
+export interface StoreProduct {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}

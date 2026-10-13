@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Catálogo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if (loading()) {
+    <div class="status" role="status">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Conectando con la API...</p>
+    </div>
+  } @else if (error()) {
+    <ion-card color="danger" role="alert">
+      <ion-card-header>
+        <ion-card-title>Fallo de Red</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ error() }}</p>
+        <ion-button (click)="fetchProducts()">Reintentar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  } @else {
+    <p class="result-count">{{ products().length }} publicaciones</p>
+    <div class="post-grid">
+      @for (product of products(); track product.id) {
+        <ion-card>
+          <ion-card-header>
+            <p class="tag">Usuario {{ product.userId }}</p>
+            <ion-card-title>{{ product.title }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="description">{{ product.body }}</p>
+          </ion-card-content>
+        </ion-card>
+      }
+    </div>
+  }
+</ion-content>

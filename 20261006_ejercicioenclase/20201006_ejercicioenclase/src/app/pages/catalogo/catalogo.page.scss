@@ -1,0 +1,45 @@
+.tag {
+  margin: 0 0 0.5rem;
+  color: var(--ion-color-tertiary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.result-count,
+.post-grid,
+.status {
+  margin-inline: auto;
+  max-width: 72rem;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+}
+
+ion-card {
+  margin: 0;
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+ion-card-title {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.description {
+  margin: 0;
+  color: var(--ion-color-medium);
+}
+
+.status {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  padding: 3rem 1rem;
+  text-align: center;
+}

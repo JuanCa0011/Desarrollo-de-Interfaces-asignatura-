@@ -1,0 +1,29 @@
+:host ion-toolbar.products-toolbar {
+  --background: #0284c7;
+  --color: #ffffff;
+  --border-color: #0369a1;
+}
+
+:host-context(.ion-palette-dark) ion-toolbar.products-toolbar {
+  --background: #075985;
+  --color: #ffffff;
+  --border-color: #0c4a6e;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-block: 1rem;
+}
+
+@media (max-width: 400px) {
+  .pagination {
+    gap: 0.5rem;
+  }
+
+  .pagination span {
+    font-size: 0.875rem;
+  }
+}

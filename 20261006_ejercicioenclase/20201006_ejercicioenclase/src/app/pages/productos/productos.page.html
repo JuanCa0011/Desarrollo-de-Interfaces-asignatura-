@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="products-toolbar">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/inicio">
       </ion-back-button>
@@ -12,15 +12,14 @@
 <ion-content class="ion-padding">
   <h1>Listado de productos</h1>
   
-<!--   @if (loading) {
+  @if (loading()) {
   <div class="loading">
     <ion-spinner></ion-spinner>
     <p>
       Cargando productos...
     </p>
   </div>
-  } -->
-  @if (error) {
+  } @else if (error()) {
   <ion-card>
     <ion-card-header>
       <ion-card-title>
@@ -29,18 +28,17 @@
     </ion-card-header>
     <ion-card-content>
       <p>
-        {{ error }}
+        {{ error() }}
       </p>
       <ion-button (click)="loadProducts()">
         Reintentar
       </ion-button>
     </ion-card-content>
   </ion-card>
-  }
-  @if (!loading && !error) {
+  } @else {
   <p>
-    Productos cargados:
-    <strong>{{ products.length }}</strong>
+    Mostrando productos
+    <strong>{{ firstProductNumber }}–{{ lastProductNumber }} de {{ total() }}</strong>
   </p>
   <div class="table-container">
     <table>
@@ -57,7 +55,7 @@
       </thead>
       <tbody>
         @for (
-        product of products;
+        product of products();
         track product.id
         ) {
         <tr>
@@ -92,5 +90,20 @@
       </tbody>
     </table>
   </div>
+  <nav class="pagination" aria-label="Paginación de productos">
+    <ion-button
+      fill="outline"
+      [disabled]="currentPage() === 1 || loading()"
+      (click)="goToPage(currentPage() - 1)">
+      Anterior
+    </ion-button>
+    <span aria-live="polite">Página {{ currentPage() }} de {{ totalPages }}</span>
+    <ion-button
+      fill="outline"
+      [disabled]="currentPage() >= totalPages || loading()"
+      (click)="goToPage(currentPage() + 1)">
+      Siguiente
+    </ion-button>
+  </nav>
   }
 </ion-content>

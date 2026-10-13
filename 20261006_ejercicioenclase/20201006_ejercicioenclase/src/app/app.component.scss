@@ -1,0 +1,5 @@
+ion-fab.theme-toggle {
+  position: fixed;
+  right: calc(1rem + env(safe-area-inset-right));
+  top: calc(0.5rem + env(safe-area-inset-top));
+}

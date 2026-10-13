@@ -1,3 +1,11 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+  <ion-fab class="theme-toggle" slot="fixed">
+    <ion-fab-button
+      [attr.aria-label]="isDarkMode ? 'Activar modo claro' : 'Activar modo oscuro'"
+      [attr.aria-pressed]="isDarkMode"
+      (click)="toggleTheme()">
+      <ion-icon [name]="isDarkMode ? 'sunny' : 'moon'" aria-hidden="true"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-app>
