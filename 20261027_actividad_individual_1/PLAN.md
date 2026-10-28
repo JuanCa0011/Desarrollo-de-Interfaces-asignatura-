@@ -45,10 +45,15 @@ Seed: 17 libros de ejemplo en 13 categorías.
   ```
 
 - Dependencia: `@supabase/supabase-js` (≥2.49, compatible con claves `sb_publishable_...`).
+- Servicio: [`SupabaseService`](../src/app/core/services/supabase.service.ts) (`providedIn: 'root'`) expone el cliente
+  de Supabase ya configurado para el resto de la app.
+- Modelos TypeScript del esquema de BD en
+  [`src/app/core/models/database.models.ts`](../src/app/core/models/database.models.ts)
+  (`Profile`, `Libro`, `Venta`, `UserRole`).
 
 ## 5. Fases de implementación
 
-- **Fase 0:** `SupabaseService`, environments, instalación de dependencias. _(en curso)_
+- **Fase 0:** `SupabaseService`, environments, instalación de dependencias. ✅ _(completado)_
 - **Fase 1:** Side Menu + lazy loading, `authGuard`/`roleMatchGuard`/`roleActivateGuard`,
   Login/Registro con validación async de email duplicado.
 - **Fase 2:** `BookDataTableComponent` (tabla + buscador), `StatWidgetComponent` (dashboard).
