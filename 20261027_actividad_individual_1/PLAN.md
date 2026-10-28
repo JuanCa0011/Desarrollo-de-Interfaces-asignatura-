@@ -28,6 +28,24 @@ Seed: 17 libros de ejemplo en 13 categorías.
 
 (El script SQL completo se entregó y ya se ejecutó manualmente en el SQL Editor de Supabase.)
 
+### 3.1 Función RPC adicional (Fase 1)
+
+```sql
+create or replace function public.email_exists(p_email text)
+returns boolean
+language sql
+security definer
+set search_path = public, auth
+as $$
+  select exists (select 1 from auth.users where lower(email) = lower(p_email));
+$$;
+
+grant execute on function public.email_exists(text) to anon, authenticated;
+```
+
+Usada por `emailExistsValidator` (validación asíncrona de email duplicado en el registro,
+Paso 1.2 de la actividad). Ya ejecutada en Supabase.
+
 ## 4. Configuración de entorno
 
 - `src/environments/environment.ts` y `environment.prod.ts` → **gitignored** (contienen la
@@ -55,7 +73,16 @@ Seed: 17 libros de ejemplo en 13 categorías.
 
 - **Fase 0:** `SupabaseService`, environments, instalación de dependencias. ✅ _(completado)_
 - **Fase 1:** Side Menu + lazy loading, `authGuard`/`roleMatchGuard`/`roleActivateGuard`,
-  Login/Registro con validación async de email duplicado.
+  Login/Registro con validación async de email duplicado. ✅ _(completado)_
+  - `AuthService` (Signals) + sesión Supabase Auth + carga de `profiles`.
+  - Guards funcionales: `authGuard`, `guestGuard`, `roleMatchGuard`/`roleActivateGuard` (RBAC),
+    `pendingChangesGuard` (protege el formulario de registro de pérdida de datos).
+  - RPC `email_exists` en Supabase + `emailExistsValidator` (AsyncValidatorFn, `updateOn: 'blur'`).
+  - `MainLayoutPage`: Side Menu (`ion-split-pane`/`ion-menu`) con navegación a Catálogo y,
+    si `isAdmin()`, al Panel de administración.
+  - Página "Catálogo" (`home.page`) ya consume `LibrosService` → Supabase (`libros`).
+  - Rutas: `login`, `register` (con `guestGuard`), shell `''` (con `authGuard`) con hijos
+    `home` y `admin` (blindada con `canMatch` + `canActivate`), `forbidden`, `**` → `not-found`.
 - **Fase 2:** `BookDataTableComponent` (tabla + buscador), `StatWidgetComponent` (dashboard).
 - **Fase 3:** `LibrosService`/`VentasService` (Supabase), `ResenasMockService` (NoSQL simulado),
   Dashboard admin con Chart.js, exportación PDF (jsPDF) y CSV.
@@ -69,3 +96,13 @@ Seed: 17 libros de ejemplo en 13 categorías.
 - [ ] Credenciales de prueba (admin / usuario estándar)
 - [ ] Informe Lighthouse (Accessibility y Best Practices ≥ 90)
 - [ ] Documentación técnica (Compodoc) + Manual de Usuario
+
+## 7. Limitaciones conocidas del entorno
+
+- El runner de tests (`ng test`, basado en `@angular/build:unit-test` + Vitest) no encuentra
+  los archivos `*.spec.ts` cuando el repositorio está anidado dentro de una ruta con paréntesis
+  (`Desarrollo de Interfaces (asignatura)`), por un problema de resolución de globs de Vitest
+  con rutas que contienen caracteres especiales. Es un problema de la ruta del workspace, no del
+  código del proyecto: `tsc --noEmit` y `ng build` sí se ejecutan correctamente y se usan como
+  validación mientras tanto. Si hace falta ejecutar los tests en CI/local, clonar el repo en una
+  ruta sin paréntesis resuelve el problema.

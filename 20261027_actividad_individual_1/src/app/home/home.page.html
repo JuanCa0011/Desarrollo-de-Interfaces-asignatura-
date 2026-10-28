@@ -1,20 +1,37 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Catálogo de libros</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Catálogo de libros</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  @if (loading()) {
+    <div class="ion-text-center ion-padding">
+      <ion-spinner name="dots" aria-label="Cargando catálogo"></ion-spinner>
+    </div>
+  } @else if (errorMessage()) {
+    <ion-text color="danger" role="alert">
+      <p>{{ errorMessage() }}</p>
+    </ion-text>
+  } @else {
+    <ion-list>
+      @for (libro of libros(); track libro.id) {
+        <ion-item>
+          <ion-label>
+            <h2>{{ libro.titulo }}</h2>
+            <p>{{ libro.autor }} · {{ libro.categoria }}</p>
+          </ion-label>
+          <ion-label slot="end" class="ion-text-end">
+            {{ libro.precio | currency: 'EUR' }}
+          </ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  }
 </ion-content>
