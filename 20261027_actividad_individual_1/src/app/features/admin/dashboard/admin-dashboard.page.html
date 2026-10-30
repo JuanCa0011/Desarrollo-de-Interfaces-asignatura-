@@ -23,7 +23,49 @@
       <app-stat-widget label="Valor del inventario" [value]="valorInventario()" icon="cash-outline" color="warning" />
     </section>
 
+    <section class="dashboard__charts" aria-label="Gráficos">
+      <app-chart-card
+        title="Stock por categoría"
+        type="bar"
+        seriesLabel="Unidades"
+        [labels]="stockPorCategoria().labels"
+        [data]="stockPorCategoria().data"
+      />
+      <app-chart-card
+        title="Ingresos por mes (EUR)"
+        type="line"
+        seriesLabel="Ingresos"
+        [labels]="ingresosPorMes().labels"
+        [data]="ingresosPorMes().data"
+      />
+    </section>
+
+    <section class="dashboard__reviews" aria-label="Reseñas recientes">
+      <h2>Reseñas recientes (tiempo real)</h2>
+      <ul class="dashboard__review-list" aria-live="polite">
+        @for (r of resenas(); track r.id) {
+          <li>
+            <strong>{{ r.libroTitulo }}</strong> — {{ r.puntuacion }}/5 · {{ r.autor }}
+            <span class="dashboard__review-date">({{ r.fecha | date: 'HH:mm:ss' }})</span>
+            <br />
+            {{ r.comentario }}
+          </li>
+        } @empty {
+          <li>Esperando reseñas…</li>
+        }
+      </ul>
+    </section>
+
     <section aria-label="Inventario">
+      <div class="dashboard__toolbar">
+        <h2>Inventario</h2>
+        <div class="dashboard__exports">
+          <ion-button size="small" fill="outline" (click)="exportInventario('csv')">Inventario CSV</ion-button>
+          <ion-button size="small" fill="outline" (click)="exportInventario('pdf')">Inventario PDF</ion-button>
+          <ion-button size="small" fill="outline" (click)="exportVentas('csv')">Ventas CSV</ion-button>
+          <ion-button size="small" fill="outline" (click)="exportVentas('pdf')">Ventas PDF</ion-button>
+        </div>
+      </div>
       <app-book-data-table [libros]="libros()" [loading]="loading()" caption="Inventario" />
     </section>
   }

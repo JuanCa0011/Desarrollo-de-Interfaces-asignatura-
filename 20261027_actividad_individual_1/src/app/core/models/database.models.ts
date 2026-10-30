@@ -42,3 +42,19 @@ export interface Venta {
   total: number;
   fecha_venta: string;
 }
+
+/** Venta con los datos del libro asociado (join `libros(...)` de PostgREST). */
+export interface VentaConLibro extends Venta {
+  libros: Pick<Libro, 'titulo' | 'categoria'> | null;
+}
+
+/** Reseña de un libro (fuente NoSQL simulada, ver `ResenasMockService`). */
+export interface Resena {
+  id: string;
+  libroId: string;
+  libroTitulo: string;
+  autor: string;
+  puntuacion: number;
+  comentario: string;
+  fecha: string;
+}

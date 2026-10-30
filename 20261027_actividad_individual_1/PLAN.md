@@ -88,7 +88,11 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
     tabla con buscador, ordenación y `aria-sort` (outputs `rowSelected`, `searchChange`) y widget KPI (output `selected`).
   - Usados en el Catálogo (`home.page`) y en el Panel admin (4 widgets + tabla de inventario).
 - **Fase 3:** `LibrosService`/`VentasService` (Supabase), `ResenasMockService` (NoSQL simulado),
-  Dashboard admin con Chart.js, exportación PDF (jsPDF) y CSV.
+  Dashboard admin con Chart.js, exportación PDF (jsPDF) y CSV. ✅ _(completado)_
+  - `VentasService` (join con `libros`), `ResenasMockService` (RxJS, `list()` + `stream()` tipo `onSnapshot`),
+    `ExportService` (CSV con BOM, PDF con jsPDF + autotable cargados en diferido).
+  - `ChartCardComponent` (Chart.js reutilizable) y dashboard con 4 widgets, 2 gráficos,
+    reseñas en tiempo real y botones de exportación de inventario y ventas.
 - **Fase 4:** Responsive mobile-first, WCAG/ARIA, auditoría Lighthouse ≥90.
 - **Fase 5:** Git flow, Compodoc, manual de usuario, despliegue en Vercel.
 

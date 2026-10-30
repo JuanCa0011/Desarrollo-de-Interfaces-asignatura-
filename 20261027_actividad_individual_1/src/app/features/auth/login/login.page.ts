@@ -61,7 +61,13 @@ export class LoginPage {
     this.submitting.set(false);
 
     if (error) {
-      this.errorMessage.set('Email o contraseña incorrectos. Inténtalo de nuevo.');
+      this.errorMessage.set(
+        /invalid login credentials/i.test(error)
+          ? 'Email o contraseña incorrectos. Inténtalo de nuevo.'
+          : /not confirmed/i.test(error)
+            ? 'Debes confirmar tu email antes de iniciar sesión. Revisa tu bandeja de entrada.'
+            : `No se pudo iniciar sesión: ${error}`,
+      );
       return;
     }
 
