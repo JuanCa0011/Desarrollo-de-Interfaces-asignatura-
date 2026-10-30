@@ -35,3 +35,36 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Accesibilidad (WCAG) ------------------------------------------------------ */
+
+/* Contenido solo para lectores de pantalla (h1 de cada página). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Foco siempre visible para la navegación por teclado. */
+:focus-visible {
+  outline: 3px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+/* Respeta la preferencia de movimiento reducido del sistema. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

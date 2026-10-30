@@ -1,7 +1,16 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, OnInit, computed, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonText, IonButton } from '@ionic/angular';
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonText,
+  IonButton,
+} from '@ionic/angular';
 import { LibrosService } from '../../../core/services/libros.service';
 import { VentasService } from '../../../core/services/ventas.service';
 import { ResenasMockService } from '../../../core/services/resenas-mock.service';
@@ -25,6 +34,8 @@ import { ChartCardComponent } from '../../../shared/components/chart-card/chart-
     DatePipe,
     IonHeader,
     IonToolbar,
+    IonButtons,
+    IonMenuButton,
     IonTitle,
     IonContent,
     IonText,

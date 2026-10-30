@@ -93,7 +93,13 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
     `ExportService` (CSV con BOM, PDF con jsPDF + autotable cargados en diferido).
   - `ChartCardComponent` (Chart.js reutilizable) y dashboard con 4 widgets, 2 gráficos,
     reseñas en tiempo real y botones de exportación de inventario y ventas.
-- **Fase 4:** Responsive mobile-first, WCAG/ARIA, auditoría Lighthouse ≥90.
+- **Fase 4:** Responsive mobile-first, WCAG/ARIA, auditoría Lighthouse ≥90. ✅ _(completado)_
+  - `index.html`: `lang="es"`, título, descripción y viewport sin bloqueo de zoom (WCAG 1.4.4).
+  - Botón de menú (`ion-menu-button`) en móvil, `h1` por página (`.sr-only`), etiquetas asociadas
+    con `label`/`labelPlacement` en `ion-input`, foco visible global y `prefers-reduced-motion`.
+  - Tabla con `caption`, `scope` y `aria-sort`; gráficos con `role="img"` y `aria-label`.
+  - Lighthouse sobre `/login`: Accesibilidad 100, Buenas prácticas 100. Las rutas protegidas
+    requieren sesión y se auditarán cuando el login esté resuelto.
 - **Fase 5:** Git flow, Compodoc, manual de usuario, despliegue en Vercel.
 
 ## 6. Checklist de entregables finales

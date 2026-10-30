@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonSpinner, IonText } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonSpinner, IonText } from '@ionic/angular';
 import { LibrosService } from '../core/services/libros.service';
 import { Libro } from '../core/models/database.models';
 import { BookDataTableComponent } from '../shared/components/book-data-table/book-data-table.component';
@@ -9,7 +9,7 @@ import { BookDataTableComponent } from '../shared/components/book-data-table/boo
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonSpinner, IonText, BookDataTableComponent],
+  imports: [IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonSpinner, IonText, BookDataTableComponent],
 })
 export class HomePage implements OnInit {
   private readonly librosService = inject(LibrosService);
