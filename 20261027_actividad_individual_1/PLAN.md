@@ -83,7 +83,10 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
   - Página "Catálogo" (`home.page`) ya consume `LibrosService` → Supabase (`libros`).
   - Rutas: `login`, `register` (con `guestGuard`), shell `''` (con `authGuard`) con hijos
     `home` y `admin` (blindada con `canMatch` + `canActivate`), `forbidden`, `**` → `not-found`.
-- **Fase 2:** `BookDataTableComponent` (tabla + buscador), `StatWidgetComponent` (dashboard).
+- **Fase 2:** `BookDataTableComponent` (tabla + buscador), `StatWidgetComponent` (dashboard). ✅ _(completado)_
+  - Componentes standalone en `src/app/shared/components/`, `OnPush`, con `input()`/`output()`:
+    tabla con buscador, ordenación y `aria-sort` (outputs `rowSelected`, `searchChange`) y widget KPI (output `selected`).
+  - Usados en el Catálogo (`home.page`) y en el Panel admin (4 widgets + tabla de inventario).
 - **Fase 3:** `LibrosService`/`VentasService` (Supabase), `ResenasMockService` (NoSQL simulado),
   Dashboard admin con Chart.js, exportación PDF (jsPDF) y CSV.
 - **Fase 4:** Responsive mobile-first, WCAG/ARIA, auditoría Lighthouse ≥90.

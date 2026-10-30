@@ -20,18 +20,15 @@
       <p>{{ errorMessage() }}</p>
     </ion-text>
   } @else {
-    <ion-list>
-      @for (libro of libros(); track libro.id) {
-        <ion-item>
-          <ion-label>
-            <h2>{{ libro.titulo }}</h2>
-            <p>{{ libro.autor }} · {{ libro.categoria }}</p>
-          </ion-label>
-          <ion-label slot="end" class="ion-text-end">
-            {{ libro.precio | currency: 'EUR' }}
-          </ion-label>
-        </ion-item>
-      }
-    </ion-list>
+    <app-book-data-table
+      [libros]="libros()"
+      caption="Catálogo de libros"
+      (rowSelected)="onRowSelected($event)"
+    />
+    @if (selected(); as libro) {
+      <p class="ion-padding-top" aria-live="polite">
+        Seleccionado: <strong>{{ libro.titulo }}</strong> — {{ libro.autor }}
+      </p>
+    }
   }
 </ion-content>

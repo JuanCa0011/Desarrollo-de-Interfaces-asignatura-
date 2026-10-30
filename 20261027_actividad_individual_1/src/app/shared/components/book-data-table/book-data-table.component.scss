@@ -1,0 +1,79 @@
+:host {
+  display: block;
+}
+
+.book-table {
+  &__state {
+    padding: 24px;
+    text-align: center;
+  }
+
+  &__scroll {
+    overflow-x: auto;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+
+    th,
+    td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--ion-color-step-150, #d9d9d9);
+    }
+  }
+
+  &__caption {
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--ion-color-step-700, #444);
+  }
+
+  &__th--numeric,
+  &__cell--numeric {
+    text-align: right !important;
+  }
+
+  &__sort {
+    all: unset;
+    cursor: pointer;
+    font-weight: 700;
+    white-space: nowrap;
+
+    &:focus-visible {
+      outline: 2px solid var(--ion-color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__title {
+    font-weight: 600;
+  }
+
+  &__row {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--ion-color-step-100, #eee);
+    }
+
+    &:focus-visible {
+      outline: none;
+      background: var(--ion-color-step-100, #eee);
+      box-shadow: inset 0 0 0 2px var(--ion-color-primary);
+    }
+  }
+
+  &__cell--low {
+    color: var(--ion-color-danger-shade, #c5000f);
+    font-weight: 700;
+  }
+
+  &__empty {
+    text-align: center !important;
+    padding: 24px !important;
+  }
+}

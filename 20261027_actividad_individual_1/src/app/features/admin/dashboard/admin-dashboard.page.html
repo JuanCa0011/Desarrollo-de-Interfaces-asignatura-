@@ -5,10 +5,26 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-text>
-    <p>
-      Acceso de administrador verificado correctamente. El Dashboard con gráficos y
-      exportación de informes se implementará en la Fase 3.
-    </p>
-  </ion-text>
+  @if (errorMessage()) {
+    <ion-text color="danger" role="alert">
+      <p>{{ errorMessage() }}</p>
+    </ion-text>
+  } @else {
+    <section class="dashboard__stats" aria-label="Resumen del inventario">
+      <app-stat-widget label="Títulos" [value]="totalTitulos()" icon="library-outline" />
+      <app-stat-widget label="Unidades en stock" [value]="totalStock()" icon="cube-outline" color="success" />
+      <app-stat-widget
+        label="Stock bajo"
+        [value]="bajoStock()"
+        hint="5 unidades o menos"
+        icon="warning-outline"
+        color="danger"
+      />
+      <app-stat-widget label="Valor del inventario" [value]="valorInventario()" icon="cash-outline" color="warning" />
+    </section>
+
+    <section aria-label="Inventario">
+      <app-book-data-table [libros]="libros()" [loading]="loading()" caption="Inventario" />
+    </section>
+  }
 </ion-content>
