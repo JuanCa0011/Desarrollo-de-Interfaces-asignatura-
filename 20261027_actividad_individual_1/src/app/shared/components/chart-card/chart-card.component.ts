@@ -5,10 +5,12 @@ import {
   ElementRef,
   OnDestroy,
   effect,
+  inject,
   input,
   viewChild,
 } from '@angular/core';
 import { Chart, ChartType, registerables } from 'chart.js';
+import { ThemeService } from '../../../core/services/theme.service';
 
 Chart.register(...registerables);
 
@@ -66,6 +68,7 @@ export class ChartCardComponent implements OnDestroy {
   protected readonly hasData = computed(() => this.data().some((v) => v > 0));
 
   private readonly canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
+  private readonly theme = inject(ThemeService);
   private chart?: Chart;
 
   constructor() {
@@ -74,6 +77,8 @@ export class ChartCardComponent implements OnDestroy {
       const labels = this.labels();
       const data = this.data();
       const label = this.seriesLabel();
+      // Dependencia del tema: los colores del texto y bordes se leen del DOM al crear el gráfico.
+      this.theme.isDark();
       const circular = type === 'pie' || type === 'doughnut';
 
       this.chart?.destroy();

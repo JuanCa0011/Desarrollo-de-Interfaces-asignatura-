@@ -34,7 +34,7 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import '@ionic/angular/css/palettes/dark.class.css';
 
 /* Accesibilidad (WCAG) ------------------------------------------------------ */
 
@@ -78,12 +78,11 @@
   --app-danger-text: #b00020;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --app-surface: #1e2023;
-    --app-surface-hover: #2a2d31;
-    --app-border: #3d4147;
-    --app-text-muted: #b8bcc6;
-    --app-danger-text: #ff8a8a;
-  }
+/* Modo oscuro: lo activa ThemeService con la clase `ion-palette-dark` en <html>. */
+:root.ion-palette-dark {
+  --app-surface: #1e2023;
+  --app-surface-hover: #2a2d31;
+  --app-border: #3d4147;
+  --app-text-muted: #b8bcc6;
+  --app-danger-text: #ff8a8a;
 }

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { libraryOutline, gridOutline, logOutOutline } from 'ionicons/icons';
+import { libraryOutline, gridOutline, logOutOutline, moonOutline, sunnyOutline } from 'ionicons/icons';
 import {
   IonSplitPane,
   IonMenu,
@@ -17,11 +17,14 @@ import {
   IonRouterOutlet,
 } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
+import { ThemeService } from '../../services/theme.service';
 
 addIcons({
   'library-outline': libraryOutline,
   'grid-outline': gridOutline,
   'log-out-outline': logOutOutline,
+  'moon-outline': moonOutline,
+  'sunny-outline': sunnyOutline,
 });
 
 /**
@@ -54,6 +57,7 @@ addIcons({
 })
 export class MainLayoutPage {
   protected readonly authService = inject(AuthService);
+  protected readonly theme = inject(ThemeService);
   private readonly router = inject(Router);
 
   public async logout(): Promise<void> {

@@ -101,6 +101,9 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
   - Lighthouse (build de producción, sesión admin iniciada con navegador automatizado):
     `/login`, `/` (Catálogo) y `/admin` → Accesibilidad 100, Buenas prácticas 100.
     Único aviso: source maps ausentes en el JS de producción (no afecta a la puntuación).
+  - Botón de modo claro/oscuro en el Side Menu: `ThemeService` (Signal + `localStorage`, valor inicial
+    según el sistema) con la paleta `dark.class` de Ionic (`ion-palette-dark` en `<html>`);
+    los gráficos se redibujan al cambiar de tema.
   - Corregido contraste en modo oscuro: tokens propios `--app-surface`, `--app-text-muted`,
     `--app-danger-text` en `global.scss` (las variables `--ion-color-step-*` no estaban definidas).
 - **Fase 5:** Git flow, Compodoc, manual de usuario, despliegue en Vercel.
