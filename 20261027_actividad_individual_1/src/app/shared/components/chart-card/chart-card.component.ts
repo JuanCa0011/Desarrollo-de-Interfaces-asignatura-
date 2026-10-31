@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   OnDestroy,
   effect,
@@ -20,7 +21,10 @@ Chart.register(...registerables);
   template: `
     <figure class="chart-card">
       <figcaption class="chart-card__title">{{ title() }}</figcaption>
-      <div class="chart-card__canvas">
+      @if (!hasData()) {
+        <p class="chart-card__empty" role="status">{{ emptyMessage() }}</p>
+      }
+      <div class="chart-card__canvas" [hidden]="!hasData()">
         <canvas #canvas role="img" [attr.aria-label]="title() + ': ' + summary()"></canvas>
       </div>
     </figure>
@@ -39,9 +43,14 @@ Chart.register(...registerables);
       margin-bottom: 8px;
       font-weight: 700;
     }
+    .chart-card__empty {
+      margin: 24px 0;
+      text-align: center;
+      color: var(--app-text-muted);
+    }
     .chart-card__canvas {
       position: relative;
-      height: 260px;
+      height: 320px;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,6 +61,9 @@ export class ChartCardComponent implements OnDestroy {
   public readonly labels = input<string[]>([]);
   public readonly data = input<number[]>([]);
   public readonly seriesLabel = input('Valor');
+  public readonly emptyMessage = input('No hay datos para mostrar.');
+
+  protected readonly hasData = computed(() => this.data().some((v) => v > 0));
 
   private readonly canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
   private chart?: Chart;
@@ -65,6 +77,9 @@ export class ChartCardComponent implements OnDestroy {
       const circular = type === 'pie' || type === 'doughnut';
 
       this.chart?.destroy();
+      this.chart = undefined;
+      if (!data.some((v) => v > 0)) return;
+
       this.chart = new Chart(this.canvas().nativeElement, {
         type,
         data: {
@@ -76,11 +91,21 @@ export class ChartCardComponent implements OnDestroy {
               backgroundColor: circular
                 ? labels.map((_, i) => `hsl(${(i * 47) % 360} 65% 50%)`)
                 : '#3880ff',
-              borderColor: '#3880ff',
+              borderColor: circular ? getComputedStyle(document.body).backgroundColor : '#3880ff',
             },
           ],
         },
-        options: { responsive: true, maintainAspectRatio: false },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: circular,
+              position: 'bottom',
+              labels: { color: getComputedStyle(document.body).color },
+            },
+          },
+        },
       });
     });
   }

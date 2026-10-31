@@ -75,9 +75,9 @@ export class AdminDashboardPage implements OnInit {
     this.group(this.libros(), (l) => l.categoria, (l) => l.stock),
   );
 
-  /** Ingresos de ventas agrupados por mes (YYYY-MM). */
-  protected readonly ingresosPorMes = computed(() =>
-    this.group(this.ventas(), (v) => v.fecha_venta.slice(0, 7), (v) => v.total),
+  /** Ingresos de ventas agrupados por categoría del libro vendido. */
+  protected readonly ingresosPorCategoria = computed(() =>
+    this.group(this.ventas(), (v) => v.libros?.categoria ?? 'Sin categoría', (v) => v.total),
   );
 
   public async ngOnInit(): Promise<void> {

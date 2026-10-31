@@ -30,17 +30,18 @@
     <section class="dashboard__charts" aria-label="Gráficos">
       <app-chart-card
         title="Stock por categoría"
-        type="bar"
+        type="doughnut"
         seriesLabel="Unidades"
         [labels]="stockPorCategoria().labels"
         [data]="stockPorCategoria().data"
       />
       <app-chart-card
-        title="Ingresos por mes (EUR)"
-        type="line"
+        title="Ingresos por categoría (EUR)"
+        emptyMessage="Todavía no hay ventas registradas."
+        type="pie"
         seriesLabel="Ingresos"
-        [labels]="ingresosPorMes().labels"
-        [data]="ingresosPorMes().data"
+        [labels]="ingresosPorCategoria().labels"
+        [data]="ingresosPorCategoria().data"
       />
     </section>
 
