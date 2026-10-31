@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+
+.dashboard {
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  &__charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  &__reviews {
+    margin-bottom: 24px;
+  }
+
+  &__review-list {
+    margin: 0;
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__review-date {
+    color: var(--ion-color-medium-shade);
+    font-size: 0.8rem;
+  }
+
+  &__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  &__exports {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+}

@@ -1,0 +1,65 @@
+:host {
+  display: block;
+}
+
+.stat-widget {
+  --stat-color: var(--ion-color-primary);
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-left: 6px solid var(--stat-color);
+  border-radius: 8px;
+  background: var(--app-surface);
+  color: var(--ion-text-color);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 3px solid var(--stat-color);
+    outline-offset: 2px;
+  }
+
+  &--success {
+    --stat-color: var(--ion-color-success);
+  }
+
+  &--warning {
+    --stat-color: var(--ion-color-warning);
+  }
+
+  &--danger {
+    --stat-color: var(--ion-color-danger);
+  }
+
+  &__icon {
+    font-size: 2rem;
+    color: var(--stat-color);
+    flex-shrink: 0;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    font-size: 0.85rem;
+    color: var(--app-text-muted);
+  }
+
+  &__value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  &__hint {
+    font-size: 0.75rem;
+    color: var(--app-text-muted);
+  }
+}
