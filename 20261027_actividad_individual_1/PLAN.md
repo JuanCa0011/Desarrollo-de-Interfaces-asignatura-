@@ -110,7 +110,9 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
   - **Compodoc** ✅: `npm run docs` genera `documentation/` (versionada en Git como entregable; regenerar con el mismo comando tras cambios) y `npm run docs:serve` la sirve
     en local. Usa `tsconfig.doc.json`. Cobertura de documentación: 98 % (JSDoc en servicios, guards,
     modelos, páginas y componentes compartidos).
-  - Pendiente: manual de usuario, Git flow (`develop`) y despliegue en Vercel.
+  - **Manual de usuario** ✅: [`docs/manual/MANUAL_USUARIO.md`](docs/manual/MANUAL_USUARIO.md), con capturas
+    en `docs/manual/img/` y credenciales de prueba.
+  - Pendiente: Git flow (`develop`) y despliegue en Vercel.
 
 ## 6. Checklist de entregables finales
 

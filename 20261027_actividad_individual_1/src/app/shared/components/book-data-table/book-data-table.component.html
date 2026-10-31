@@ -14,7 +14,7 @@
   <div class="book-table__scroll">
     <table class="book-table__table">
       <caption class="book-table__caption">
-        {{ caption() }} ({{ rows().length }} resultados)
+        {{ caption() }} ({{ rows().length }} {{ rows().length === 1 ? 'resultado' : 'resultados' }})
       </caption>
       <thead>
         <tr>
