@@ -4,6 +4,8 @@
 rol de administrador, ver estadísticas del negocio y descargar informes. Funciona en ordenador,
 tableta y móvil, con modo claro y oscuro.
 
+**Aplicación en producción:** <https://actividadindividual1.vercel.app>
+
 ## Índice
 
 1. [Cuentas de prueba](#1-cuentas-de-prueba)
