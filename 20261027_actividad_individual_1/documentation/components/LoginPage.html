@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Librería DI 0488</title>
+        <title>Librería</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -78,7 +78,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">Librería DI 0488</a>
+                    <a href="../" class="navbar-brand">Librería</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -833,14 +833,9 @@ export class LoginPage {
     &lt;aside class&#x3D;&quot;auth__hero&quot;&gt;
       &lt;div class&#x3D;&quot;auth__brand&quot;&gt;
         &lt;span class&#x3D;&quot;auth__logo&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;ion-icon name&#x3D;&quot;book-outline&quot;&gt;&lt;/ion-icon&gt;&lt;/span&gt;
-        Librería DI 0488
+        Librería
       &lt;/div&gt;
       &lt;p class&#x3D;&quot;auth__headline&quot;&gt;Tu librería, siempre abierta.&lt;/p&gt;
-      &lt;ul class&#x3D;&quot;auth__points&quot;&gt;
-        &lt;li&gt;📚 Catálogo con buscador y filtros por categoría&lt;/li&gt;
-        &lt;li&gt;📊 Panel de administración con estadísticas&lt;/li&gt;
-        &lt;li&gt;🌗 Modo claro y oscuro&lt;/li&gt;
-      &lt;/ul&gt;
     &lt;/aside&gt;
 
     &lt;section class&#x3D;&quot;auth__panel&quot;&gt;
@@ -1109,7 +1104,7 @@ ion-input {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar>    <ion-title>Iniciar sesión</ion-title>    <ion-buttons slot="end">      <app-theme-toggle></app-theme-toggle>    </ion-buttons>  </ion-toolbar></ion-header><ion-content>  <div class="auth">    <aside class="auth__hero">      <div class="auth__brand">        <span class="auth__logo" aria-hidden="true"><ion-icon name="book-outline"></ion-icon></span>        Librería DI 0488      </div>      <p class="auth__headline">Tu librería, siempre abierta.</p>      <ul class="auth__points">        <li>📚 Catálogo con buscador y filtros por categoría</li>        <li>📊 Panel de administración con estadísticas</li>        <li>🌗 Modo claro y oscuro</li>      </ul>    </aside>    <section class="auth__panel">      <div class="auth__card">        <h1 class="auth__title">Bienvenido de nuevo</h1>        <p class="auth__subtitle">Inicia sesión para ver el catálogo.</p>        <form          class="auth__form"          [formGroup]="form"          (ngSubmit)="onSubmit()"          novalidate          aria-label="Formulario de inicio de sesión"        >          <div class="auth__field">            <ion-input              label="Email"              labelPlacement="floating"              fill="outline"              type="email"              formControlName="email"              autocomplete="email"              inputmode="email"              required              aria-required="true"            ></ion-input>          </div>          @if (form.controls.email.invalid && form.controls.email.touched) {            <p class="auth__error" role="alert">Introduce un email válido.</p>          }          <div class="auth__field">            <ion-input              label="Contraseña"              labelPlacement="floating"              fill="outline"              type="password"              formControlName="password"              autocomplete="current-password"              required              aria-required="true"            >              <ion-input-password-toggle slot="end"></ion-input-password-toggle>            </ion-input>          </div>          @if (form.controls.password.invalid && form.controls.password.touched) {            <p class="auth__error" role="alert">La contraseña es obligatoria.</p>          }          @if (errorMessage()) {            <p class="auth__alert" role="alert">{{ errorMessage() }}</p>          }          <ion-button class="auth__submit" expand="block" type="submit" [disabled]="submitting()">            {{ submitting() ? \'Entrando…\' : \'Entrar\' }}          </ion-button>        </form>        <p class="auth__switch">¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>      </div>    </section>  </div></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar>    <ion-title>Iniciar sesión</ion-title>    <ion-buttons slot="end">      <app-theme-toggle></app-theme-toggle>    </ion-buttons>  </ion-toolbar></ion-header><ion-content>  <div class="auth">    <aside class="auth__hero">      <div class="auth__brand">        <span class="auth__logo" aria-hidden="true"><ion-icon name="book-outline"></ion-icon></span>        Librería      </div>      <p class="auth__headline">Tu librería, siempre abierta.</p>    </aside>    <section class="auth__panel">      <div class="auth__card">        <h1 class="auth__title">Bienvenido de nuevo</h1>        <p class="auth__subtitle">Inicia sesión para ver el catálogo.</p>        <form          class="auth__form"          [formGroup]="form"          (ngSubmit)="onSubmit()"          novalidate          aria-label="Formulario de inicio de sesión"        >          <div class="auth__field">            <ion-input              label="Email"              labelPlacement="floating"              fill="outline"              type="email"              formControlName="email"              autocomplete="email"              inputmode="email"              required              aria-required="true"            ></ion-input>          </div>          @if (form.controls.email.invalid && form.controls.email.touched) {            <p class="auth__error" role="alert">Introduce un email válido.</p>          }          <div class="auth__field">            <ion-input              label="Contraseña"              labelPlacement="floating"              fill="outline"              type="password"              formControlName="password"              autocomplete="current-password"              required              aria-required="true"            >              <ion-input-password-toggle slot="end"></ion-input-password-toggle>            </ion-input>          </div>          @if (form.controls.password.invalid && form.controls.password.touched) {            <p class="auth__error" role="alert">La contraseña es obligatoria.</p>          }          @if (errorMessage()) {            <p class="auth__alert" role="alert">{{ errorMessage() }}</p>          }          <ion-button class="auth__submit" expand="block" type="submit" [disabled]="submitting()">            {{ submitting() ? \'Entrando…\' : \'Entrar\' }}          </ion-button>        </form>        <p class="auth__switch">¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>      </div>    </section>  </div></ion-content></div>'
     var COMPONENTS = [{'name': 'AdminDashboardPage', 'selector': 'app-admin-dashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BookCardComponent', 'selector': 'app-book-card'},{'name': 'BookCoverComponent', 'selector': 'app-book-cover'},{'name': 'BookDataTableComponent', 'selector': 'app-book-data-table'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ForbiddenPage', 'selector': 'app-forbidden'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MainLayoutPage', 'selector': 'app-main-layout'},{'name': 'NotFoundPage', 'selector': 'app-not-found'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginPage'};

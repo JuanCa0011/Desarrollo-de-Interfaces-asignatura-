@@ -11,7 +11,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "docs": "compodoc -p tsconfig.doc.json -d documentation --name \"Librería DI 0488\" --silent",
+    "docs": "compodoc -p tsconfig.doc.json -d documentation --name \"Librería\" --silent",
     "docs:serve": "compodoc -p tsconfig.doc.json -d documentation -s"
   },
   "private": true,

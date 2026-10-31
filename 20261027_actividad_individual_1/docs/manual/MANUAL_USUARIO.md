@@ -1,6 +1,6 @@
-# Manual de usuario — Librería DI 0488
+# Manual de usuario — Librería
 
-**Librería DI 0488** es una aplicación web para consultar un catálogo de libros y, si tienes
+**Librería** es una aplicación web para consultar un catálogo de libros y, si tienes
 rol de administrador, ver estadísticas del negocio y descargar informes. Funciona en ordenador,
 tableta y móvil, con modo claro y oscuro.
 
