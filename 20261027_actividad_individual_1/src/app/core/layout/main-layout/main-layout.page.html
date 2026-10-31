@@ -1,39 +1,62 @@
 <ion-split-pane contentId="main-content">
-  <ion-menu contentId="main-content" type="overlay">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Librería DI 0488</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-menu-toggle autoHide="false">
-          <ion-item
-            routerLink="/"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <ion-icon slot="start" name="library-outline" aria-hidden="true"></ion-icon>
-            <ion-label>Catálogo</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
+  <ion-menu contentId="main-content" type="overlay" class="side-menu">
+    <ion-content class="side-menu__content">
+      <div class="side-menu__inner">
+        <a class="side-menu__brand" routerLink="/" aria-label="Librería DI 0488, ir al catálogo">
+          <span class="side-menu__logo" aria-hidden="true">
+            <ion-icon name="book-outline"></ion-icon>
+          </span>
+          <span class="side-menu__name">Librería <small>DI 0488</small></span>
+        </a>
 
-        @if (authService.isAdmin()) {
+        <nav aria-label="Navegación principal">
+          <ul class="side-menu__list">
+            <li>
+              <ion-menu-toggle autoHide="false">
+                <a
+                  class="side-menu__link"
+                  routerLink="/"
+                  routerLinkActive="side-menu__link--active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <ion-icon name="library-outline" aria-hidden="true"></ion-icon>
+                  <span>Catálogo</span>
+                </a>
+              </ion-menu-toggle>
+            </li>
+
+            @if (authService.isAdmin()) {
+              <li>
+                <ion-menu-toggle autoHide="false">
+                  <a
+                    class="side-menu__link"
+                    routerLink="/admin"
+                    routerLinkActive="side-menu__link--active"
+                  >
+                    <ion-icon name="grid-outline" aria-hidden="true"></ion-icon>
+                    <span>Panel de administración</span>
+                  </a>
+                </ion-menu-toggle>
+              </li>
+            }
+          </ul>
+        </nav>
+
+        <div class="side-menu__user">
+          <span class="side-menu__avatar" aria-hidden="true">{{ initial() }}</span>
+          <span class="side-menu__user-info">
+            <span class="side-menu__user-name">{{ authService.profile()?.nombre ?? 'Usuario' }}</span>
+            <span class="side-menu__role">
+              {{ authService.isAdmin() ? 'Administrador' : 'Usuario estándar' }}
+            </span>
+          </span>
           <ion-menu-toggle autoHide="false">
-            <ion-item routerLink="/admin" routerLinkActive="selected">
-              <ion-icon slot="start" name="grid-outline" aria-hidden="true"></ion-icon>
-              <ion-label>Panel de administración</ion-label>
-            </ion-item>
+            <button type="button" class="side-menu__logout" aria-label="Cerrar sesión" (click)="logout()">
+              <ion-icon name="log-out-outline" aria-hidden="true"></ion-icon>
+            </button>
           </ion-menu-toggle>
-        }
-
-        <ion-menu-toggle autoHide="false">
-          <ion-item button="true" (click)="logout()">
-            <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>
-            <ion-label>Cerrar sesión</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-      </ion-list>
+        </div>
+      </div>
     </ion-content>
   </ion-menu>
 

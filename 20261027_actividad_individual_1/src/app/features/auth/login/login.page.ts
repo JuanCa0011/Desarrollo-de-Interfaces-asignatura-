@@ -7,19 +7,23 @@ import {
   IonButtons,
   IonTitle,
   IonContent,
-  IonItem,
+  IonIcon,
   IonInput,
+  IonInputPasswordToggle,
   IonButton,
-  IonText,
 } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { bookOutline } from 'ionicons/icons';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/theme-toggle.component';
+
+addIcons({ 'book-outline': bookOutline });
 
 /** Página de inicio de sesión (email y contraseña) contra Supabase Auth. */
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  styleUrls: ['../auth.shared.scss'],
   imports: [
     ThemeToggleComponent,
     IonButtons,
@@ -29,10 +33,10 @@ import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/th
     IonToolbar,
     IonTitle,
     IonContent,
-    IonItem,
+    IonIcon,
+    IonInputPasswordToggle,
     IonInput,
     IonButton,
-    IonText,
   ],
 })
 export class LoginPage {

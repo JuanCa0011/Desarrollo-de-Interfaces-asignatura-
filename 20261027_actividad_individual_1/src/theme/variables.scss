@@ -1,2 +1,87 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+/*
+ * Tema de la app (identidad "Librería"): papel cálido en claro, azul noche en oscuro,
+ * un único acento índigo y tipografía serif para títulos. Se carga después de global.scss,
+ * por lo que estos valores prevalecen sobre las paletas de Ionic.
+ * Ionic theming: https://ionicframework.com/docs/theming/
+ */
+@use '@fontsource-variable/inter';
+@use '@fontsource-variable/fraunces';
+
+:root {
+  /* Tipografía */
+  --ion-font-family: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --app-font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+
+  /* Acento (índigo; contraste 8:1 sobre blanco) */
+  --ion-color-primary: #4338ca;
+  --ion-color-primary-rgb: 67, 56, 202;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3b32b2;
+  --ion-color-primary-tint: #574ecf;
+
+  /* Superficies y texto (claro) */
+  --ion-background-color: #f6f3ee;
+  --ion-background-color-rgb: 246, 243, 238;
+  --ion-text-color: #1c1b29;
+  --ion-text-color-rgb: 28, 27, 41;
+  --ion-toolbar-background: rgba(255, 255, 255, 0.85);
+  --ion-toolbar-color: #1c1b29;
+  --ion-item-background: transparent;
+
+  --app-surface: #ffffff;
+  --app-surface-hover: #efeae2;
+  --app-border: #e3ddd1;
+  --app-text-muted: #5b5870;
+  --app-danger-text: #b00020;
+  --app-success-text: #166534;
+  --app-warning-text: #92400e;
+  --app-radius: 16px;
+  --app-shadow: 0 1px 2px rgba(28, 27, 41, 0.06), 0 8px 24px rgba(28, 27, 41, 0.06);
+  --app-shadow-hover: 0 2px 4px rgba(28, 27, 41, 0.08), 0 16px 36px rgba(28, 27, 41, 0.14);
+}
+
+:root.ion-palette-dark {
+  --ion-color-primary: #8b93ff;
+  --ion-color-primary-rgb: 139, 147, 255;
+  --ion-color-primary-contrast: #0e1120;
+  --ion-color-primary-contrast-rgb: 14, 17, 32;
+  --ion-color-primary-shade: #7a81e0;
+  --ion-color-primary-tint: #979eff;
+
+  --ion-background-color: #0e1120;
+  --ion-background-color-rgb: 14, 17, 32;
+  --ion-text-color: #ebeaf7;
+  --ion-text-color-rgb: 235, 234, 247;
+  --ion-toolbar-background: rgba(24, 28, 49, 0.85);
+  --ion-toolbar-color: #ebeaf7;
+
+  --app-surface: #181c31;
+  --app-surface-hover: #222742;
+  --app-border: #2c3250;
+  --app-text-muted: #a9acc7;
+  --app-danger-text: #ff8f9a;
+  --app-success-text: #6ee7a0;
+  --app-warning-text: #fcd34d;
+  --app-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --app-shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.5), 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+/* Títulos con serif editorial */
+h1,
+h2,
+h3,
+ion-title {
+  font-family: var(--app-font-display);
+  letter-spacing: -0.01em;
+}
+
+ion-toolbar {
+  --border-width: 0 0 1px 0;
+  --border-color: var(--app-border);
+  backdrop-filter: saturate(1.4) blur(10px);
+}
+
+ion-content {
+  --background: var(--ion-background-color);
+}

@@ -4,20 +4,30 @@
 
 .stat-widget {
   --stat-color: var(--ion-color-primary);
+  --stat-text: var(--ion-color-primary);
 
   display: flex;
   align-items: center;
   gap: 16px;
   width: 100%;
-  padding: 16px;
-  border: 0;
-  border-left: 6px solid var(--stat-color);
-  border-radius: 8px;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
   background: var(--app-surface);
   color: var(--ion-text-color);
   text-align: left;
   font: inherit;
   cursor: pointer;
+  box-shadow: var(--app-shadow);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--app-shadow-hover);
+  }
 
   &:focus-visible {
     outline: 3px solid var(--stat-color);
@@ -25,37 +35,49 @@
   }
 
   &--success {
-    --stat-color: var(--ion-color-success);
+    --stat-color: #16a34a;
+    --stat-text: var(--app-success-text);
   }
 
   &--warning {
-    --stat-color: var(--ion-color-warning);
+    --stat-color: #d97706;
+    --stat-text: var(--app-warning-text);
   }
 
   &--danger {
-    --stat-color: var(--ion-color-danger);
+    --stat-color: #dc2626;
+    --stat-text: var(--app-danger-text);
   }
 
   &__icon {
-    font-size: 2rem;
-    color: var(--stat-color);
+    display: grid;
+    place-items: center;
     flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    font-size: 1.6rem;
+    color: var(--stat-text);
+    background: color-mix(in srgb, var(--stat-color) 14%, transparent);
   }
 
   &__body {
     display: flex;
     flex-direction: column;
+    min-width: 0;
   }
 
   &__label {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
+    font-weight: 600;
     color: var(--app-text-muted);
   }
 
   &__value {
-    font-size: 1.75rem;
+    font-family: var(--app-font-display);
+    font-size: 1.9rem;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.15;
   }
 
   &__hint {

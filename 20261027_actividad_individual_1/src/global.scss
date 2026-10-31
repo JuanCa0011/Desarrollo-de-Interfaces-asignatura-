@@ -68,21 +68,3 @@
     scroll-behavior: auto !important;
   }
 }
-
-/* Tokens de superficie propios: cambian con el esquema de color del sistema. */
-:root {
-  --app-surface: #f4f5f8;
-  --app-surface-hover: #e6e8ee;
-  --app-border: #c5c8d0;
-  --app-text-muted: #4a4f5c;
-  --app-danger-text: #b00020;
-}
-
-/* Modo oscuro: lo activa ThemeService con la clase `ion-palette-dark` en <html>. */
-:root.ion-palette-dark {
-  --app-surface: #1e2023;
-  --app-surface-hover: #2a2d31;
-  --app-border: #3d4147;
-  --app-text-muted: #b8bcc6;
-  --app-danger-text: #ff8a8a;
-}

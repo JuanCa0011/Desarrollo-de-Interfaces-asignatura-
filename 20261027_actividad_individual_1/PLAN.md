@@ -106,6 +106,13 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
     los gráficos se redibujan al cambiar de tema.
   - Corregido contraste en modo oscuro: tokens propios `--app-surface`, `--app-text-muted`,
     `--app-danger-text` en `global.scss` (las variables `--ion-color-step-*` no estaban definidas).
+- **Rediseño visual** ✅ (rama `feature/actividad1-diseno`): referencias de Dribbble y guías de dashboards 2026.
+  - Tema en `src/theme/variables.scss`: papel cálido / azul noche, acento índigo, Fraunces (títulos) + Inter.
+  - Catálogo con hero, filtros por categoría, orden, `BookCardComponent` + `BookCoverComponent`
+    (portadas generadas con CSS, sustituyen a los placeholders externos) y modal de detalle.
+  - Login/registro en diseño partido; menú lateral con marca y tarjeta de usuario.
+  - Dashboard bento: KPI planos, circulares con top 5 + «Otros», reseñas en directo y tabla en panel.
+  - Lighthouse tras el rediseño (claro y oscuro): Accesibilidad 100 / Buenas prácticas 100.
 - **Fase 5:** Git flow, Compodoc, manual de usuario, despliegue en Vercel.
   - **Compodoc** ✅: `npm run docs` genera `documentation/` (versionada en Git como entregable; regenerar con el mismo comando tras cambios) y `npm run docs:serve` la sirve
     en local. Usa `tsconfig.doc.json`. Cobertura de documentación: 98 % (JSDoc en servicios, guards,

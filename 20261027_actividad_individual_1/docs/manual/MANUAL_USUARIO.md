@@ -36,16 +36,23 @@ de poder entrar.
 
 ## 4. Catálogo de libros
 
-Tras iniciar sesión se muestra el catálogo con título, autor, categoría, precio y stock.
+Tras iniciar sesión se muestra el catálogo como un escaparate de tarjetas con portada, categoría,
+valoración, estado de stock y precio. Los libros con descuento muestran el precio rebajado junto
+al original tachado.
 
 ![Catálogo de libros](img/03-catalogo.png)
 
-- **Buscar:** escribe en el cuadro superior; se filtra por título, autor, categoría o ISBN.
-- **Ordenar:** pulsa el nombre de una columna. Pulsa otra vez para invertir el orden. La flecha
-  indica la columna y el sentido activos.
-- **Seleccionar:** pulsa una fila (o usa el teclado con `Tab` y `Intro`) para marcar un libro.
+- **Buscar:** escribe en el cuadro del banner; se filtra por título, autor, categoría o ISBN.
+- **Filtrar por categoría:** pulsa una etiqueta (con el número de libros de cada una). Vuelve a
+  pulsarla, o elige **Todas**, para quitar el filtro.
+- **Ordenar:** el selector **Ordenar por** permite elegir destacados primero, título, precio
+  (de menor a mayor o al revés) o mejor valorados.
+- **Ver el detalle:** pulsa una tarjeta (o usa `Tab` e `Intro`) para abrir una ficha con la
+  descripción, editorial, año, páginas, idioma, ISBN y disponibilidad. Se cierra con la ✕ o con `Esc`.
 
 ![Búsqueda en el catálogo](img/04-busqueda.png)
+
+![Detalle de un libro](img/08-detalle.png)
 
 ## 5. Menú y navegación
 
@@ -54,9 +61,10 @@ botón de las tres rayas, arriba a la izquierda.
 
 ![Menú en el móvil](img/05-movil-menu.png)
 
-- **Catálogo:** lista de libros.
+- **Catálogo:** escaparate de libros.
 - **Panel de administración:** solo aparece si eres administrador.
-- **Cerrar sesión:** termina tu sesión y te lleva al login.
+- **Tarjeta de usuario** (parte inferior): muestra tu nombre y tu rol, y el botón de salida para
+  **cerrar sesión**, que te lleva al login.
 
 Si intentas abrir una sección para la que no tienes permiso verás la página **403 · Acceso
 denegado**; si la dirección no existe, la página **404 · Página no encontrada**.
@@ -69,14 +77,15 @@ Muestra un resumen del negocio:
 
 - **Tarjetas:** títulos, unidades en stock, libros con stock bajo (5 unidades o menos) y valor del
   inventario.
-- **Gráficos circulares:** stock por categoría e ingresos por categoría. Si todavía no hay ventas,
-  el gráfico de ingresos lo indica con un mensaje.
-- **Reseñas recientes:** se van actualizando solas en tiempo real (datos de ejemplo).
+- **Gráficos circulares:** stock por categoría e ingresos por categoría. Se muestran las 5
+  categorías mayores y el resto agrupado en «Otros». Si todavía no hay ventas, el gráfico de
+  ingresos lo indica con un mensaje.
+- **Reseñas recientes:** tarjetas que se actualizan solas «en directo» (datos de ejemplo).
 - **Inventario:** la misma tabla del catálogo, con buscador y ordenación.
 
 ### Exportar informes
 
-Sobre la tabla de inventario hay cuatro botones:
+En la cabecera del panel hay cuatro botones de exportación:
 
 | Botón | Resultado |
 |---|---|

@@ -1,0 +1,34 @@
+<button type="button" class="book-card" (click)="selected.emit(libro())">
+  <span class="book-card__cover">
+    <app-book-cover [titulo]="libro().titulo" [autor]="libro().autor" />
+    @if (descuento() > 0) {
+      <span class="book-card__badge book-card__badge--discount">-{{ descuento() }}%</span>
+    }
+    @if (libro().destacado) {
+      <span class="book-card__badge book-card__badge--featured">Destacado</span>
+    }
+  </span>
+
+  <span class="book-card__body">
+    <span class="book-card__category">{{ libro().categoria }}</span>
+    <span class="book-card__title">{{ libro().titulo }}</span>
+    <span class="book-card__author">{{ libro().autor }}</span>
+
+    <span class="book-card__meta">
+      @if (libro().valoracion; as v) {
+        <span class="book-card__rating">
+          <span class="sr-only">Valoración {{ v }} de 5</span>
+          <span aria-hidden="true">★ {{ v }}</span>
+        </span>
+      }
+      <span class="book-card__stock book-card__stock--{{ stock().kind }}">{{ stock().text }}</span>
+    </span>
+
+    <span class="book-card__price">
+      <span class="book-card__price-now">{{ precioFinal() | currency: 'EUR' }}</span>
+      @if (descuento() > 0) {
+        <s class="book-card__price-old">{{ libro().precio | currency: 'EUR' }}</s>
+      }
+    </span>
+  </span>
+</button>
