@@ -1,5 +1,186 @@
-ion-item.selected {
-  --background: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.08);
-  --color: var(--ion-color-primary, #3880ff);
-  font-weight: 600;
+/*
+ * Ancho del menú = enlace más largo («Panel de administración», 241 px con icono y relleno)
+ * + relleno lateral (28 px). Ionic ignora `--width` del ion-menu dentro del split-pane
+ * (usa 28 % del ancho de la ventana), por eso se fija también en el propio split-pane.
+ */
+ion-split-pane {
+  --side-width: 272px;
+  --side-min-width: 272px;
+  --side-max-width: 272px;
+}
+
+.side-menu {
+  --width: 272px;
+  --max-width: 85vw;
+  --background: var(--app-surface);
+  --border: 1px solid var(--app-border);
+
+  &__content {
+    --background: var(--app-surface);
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 100%;
+    padding: 20px 14px;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 8px;
+    color: var(--ion-text-color);
+    text-decoration: none;
+    border-radius: 12px;
+
+    &:focus-visible {
+      outline: 3px solid var(--ion-color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__logo {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    font-size: 1.35rem;
+    color: #fff;
+    background: linear-gradient(135deg, #4338ca, #9333ea);
+  }
+
+  &__name {
+    font-family: var(--app-font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    color: var(--app-text-muted);
+    text-decoration: none;
+    transition: background 150ms ease;
+
+    ion-icon {
+      font-size: 1.25rem;
+    }
+
+    &:hover {
+      background: var(--app-surface-hover);
+      color: var(--ion-text-color);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--ion-color-primary);
+      outline-offset: 2px;
+    }
+
+    &--active,
+    &--active:hover {
+      color: var(--ion-color-primary-contrast);
+      background: var(--ion-color-primary);
+    }
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+    padding: 12px;
+    border: 1px solid var(--app-border);
+    border-radius: 14px;
+    background: var(--ion-background-color);
+  }
+
+  &__user-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ion-color-primary-contrast);
+    background: var(--ion-color-primary);
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__user-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  &__role {
+    font-size: 0.72rem;
+    color: var(--app-text-muted);
+  }
+
+  &__logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% + 24px);
+    min-height: 42px;
+    margin: 0 -12px -12px;
+    padding: 0 12px;
+    border: 0;
+    border-top: 1px solid var(--app-border);
+    border-radius: 0 0 10px 10px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--app-text-muted);
+    background: transparent;
+    cursor: pointer;
+
+    ion-icon {
+      font-size: 1.15rem;
+    }
+
+    &:hover {
+      color: var(--app-danger-text);
+      background: var(--app-surface-hover);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--ion-color-primary);
+      outline-offset: -3px;
+    }
+  }
 }

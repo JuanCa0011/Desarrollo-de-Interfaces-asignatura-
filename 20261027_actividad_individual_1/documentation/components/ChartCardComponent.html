@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Librería DI 0488</title>
+        <title>Librería</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -78,7 +78,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">Librería DI 0488</a>
+                    <a href="../" class="navbar-brand">Librería</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -209,17 +209,28 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
       display: block;
     }
     .chart-card {
+      display: flex;
+      flex-direction: column;
       margin: 0;
-      padding: 16px;
-      border-radius: 8px;
+      padding: 20px;
+      height: 100%;
+      border: 1px solid var(--app-border);
+      border-radius: var(--app-radius);
       background: var(--app-surface);
+      box-shadow: var(--app-shadow);
     }
     .chart-card__title {
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      font-family: var(--app-font-display);
+      font-size: 1.1rem;
       font-weight: 700;
     }
     .chart-card__empty {
-      margin: 24px 0;
+      display: grid;
+      flex: 1;
+      place-items: center;
+      min-height: 160px;
+      margin: 0;
       text-align: center;
       color: var(--app-text-muted);
     }
@@ -394,7 +405,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:82</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:96</a></div>
                             </td>
                         </tr>
 
@@ -431,7 +442,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:68</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:82</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -463,7 +474,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:72</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:86</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -495,7 +506,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:66</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:80</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -527,7 +538,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:70</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:84</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -559,7 +570,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:76</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -591,7 +602,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:64</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:78</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -634,8 +645,8 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="137"
-                                    class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:137</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="153"
+                                    class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:153</a></div>
                         </td>
                     </tr>
 
@@ -675,8 +686,8 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="130"
-                                    class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:130</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:146</a></div>
                         </td>
                     </tr>
 
@@ -727,7 +738,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:78</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -761,7 +772,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:82</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -800,7 +811,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:75</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:89</a></div>
                         </td>
                     </tr>
 
@@ -839,7 +850,7 @@ Se actualiza al cambiar los datos y libera el canvas en <code>ngOnDestroy</code>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/shared/components/chart-card/chart-card.component.ts:94</a></div>
                         </td>
                     </tr>
 
@@ -874,6 +885,9 @@ import { ThemeService } from &#x27;../../../core/services/theme.service&#x27;;
 
 Chart.register(...registerables);
 
+/** Paleta de series: acento índigo + tonos con buen contraste en claro y oscuro (el gris se reserva a &quot;Otros&quot;). */
+const PALETTE &#x3D; [&#x27;#6366f1&#x27;, &#x27;#14b8a6&#x27;, &#x27;#f59e0b&#x27;, &#x27;#ec4899&#x27;, &#x27;#8b5cf6&#x27;, &#x27;#94a3b8&#x27;];
+
 /**
  * Gráfico Chart.js reutilizable y agnóstico: recibe tipo, etiquetas y serie por &#x60;input()&#x60;.
  * Se actualiza al cambiar los datos y libera el canvas en &#x60;ngOnDestroy&#x60; (sin memory leaks).
@@ -896,17 +910,28 @@ Chart.register(...registerables);
       display: block;
     }
     .chart-card {
+      display: flex;
+      flex-direction: column;
       margin: 0;
-      padding: 16px;
-      border-radius: 8px;
+      padding: 20px;
+      height: 100%;
+      border: 1px solid var(--app-border);
+      border-radius: var(--app-radius);
       background: var(--app-surface);
+      box-shadow: var(--app-shadow);
     }
     .chart-card__title {
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      font-family: var(--app-font-display);
+      font-size: 1.1rem;
       font-weight: 700;
     }
     .chart-card__empty {
-      margin: 24px 0;
+      display: grid;
+      flex: 1;
+      place-items: center;
+      min-height: 160px;
+      margin: 0;
       text-align: center;
       color: var(--app-text-muted);
     }
@@ -965,20 +990,22 @@ export class ChartCardComponent implements OnDestroy {
               label,
               data,
               backgroundColor: circular
-                ? labels.map((_, i) &#x3D;&gt; &#x60;hsl(${(i * 47) % 360} 65% 50%)&#x60;)
-                : &#x27;#3880ff&#x27;,
-              borderColor: circular ? getComputedStyle(document.body).backgroundColor : &#x27;#3880ff&#x27;,
+                ? labels.map((l, i) &#x3D;&gt; (l &#x3D;&#x3D;&#x3D; &#x27;Otros&#x27; ? PALETTE[5] : PALETTE[i % 5]))
+                : &#x27;#6366f1&#x27;,
+              borderColor: circular ? getComputedStyle(document.documentElement).getPropertyValue(&#x27;--app-surface&#x27;).trim() : &#x27;#6366f1&#x27;,
+              borderWidth: circular ? 3 : 2,
             },
           ],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          ...(type &#x3D;&#x3D;&#x3D; &#x27;doughnut&#x27; ? { cutout: &#x27;64%&#x27; } : {}),
           plugins: {
             legend: {
               display: circular,
               position: &#x27;bottom&#x27;,
-              labels: { color: getComputedStyle(document.body).color },
+              labels: { color: getComputedStyle(document.body).color, usePointStyle: true, padding: 14 },
             },
           },
         },
@@ -1008,17 +1035,28 @@ export class ChartCardComponent implements OnDestroy {
       display: block;
     }
     .chart-card {
+      display: flex;
+      flex-direction: column;
       margin: 0;
-      padding: 16px;
-      border-radius: 8px;
+      padding: 20px;
+      height: 100%;
+      border: 1px solid var(--app-border);
+      border-radius: var(--app-radius);
       background: var(--app-surface);
+      box-shadow: var(--app-shadow);
     }
     .chart-card__title {
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      font-family: var(--app-font-display);
+      font-size: 1.1rem;
       font-weight: 700;
     }
     .chart-card__empty {
-      margin: 24px 0;
+      display: grid;
+      flex: 1;
+      place-items: center;
+      min-height: 160px;
+      margin: 0;
       text-align: center;
       color: var(--app-text-muted);
     }
@@ -1056,7 +1094,7 @@ export class ChartCardComponent implements OnDestroy {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><figure class="chart-card">  <figcaption class="chart-card__title">{{ title() }}</figcaption>  @if (!hasData()) {    <p class="chart-card__empty" role="status">{{ emptyMessage() }}</p>  }  <div class="chart-card__canvas" [hidden]="!hasData()">    <canvas #canvas role="img" [attr.aria-label]="title() + \': \' + summary()"></canvas>  </div></figure></div>'
-    var COMPONENTS = [{'name': 'AdminDashboardPage', 'selector': 'app-admin-dashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BookDataTableComponent', 'selector': 'app-book-data-table'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ForbiddenPage', 'selector': 'app-forbidden'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MainLayoutPage', 'selector': 'app-main-layout'},{'name': 'NotFoundPage', 'selector': 'app-not-found'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'}];
+    var COMPONENTS = [{'name': 'AdminDashboardPage', 'selector': 'app-admin-dashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BookCardComponent', 'selector': 'app-book-card'},{'name': 'BookCoverComponent', 'selector': 'app-book-cover'},{'name': 'BookDataTableComponent', 'selector': 'app-book-data-table'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ForbiddenPage', 'selector': 'app-forbidden'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MainLayoutPage', 'selector': 'app-main-layout'},{'name': 'NotFoundPage', 'selector': 'app-not-found'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ChartCardComponent'};
 </script>

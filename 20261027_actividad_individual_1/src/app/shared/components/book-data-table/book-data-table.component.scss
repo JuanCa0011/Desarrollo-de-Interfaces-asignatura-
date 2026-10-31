@@ -40,7 +40,11 @@
   &__sort {
     all: unset;
     cursor: pointer;
+    font-size: 0.72rem;
     font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--app-text-muted);
     white-space: nowrap;
 
     &:focus-visible {

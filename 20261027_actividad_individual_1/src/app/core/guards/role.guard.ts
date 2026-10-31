@@ -1,5 +1,13 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, CanMatchFn, Route, UrlSegment, Router } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateFn,
+  CanMatchFn,
+  Route,
+  Router,
+  RouterStateSnapshot,
+  UrlSegment,
+} from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { UserRole } from '../models/database.models';
 
@@ -12,14 +20,16 @@ import { UserRole } from '../models/database.models';
  * Ambas devuelven un UrlTree (nunca un booleano "a secas") para redirigir de forma atómica.
  */
 export const roleMatchGuard = (allowedRoles: readonly UserRole[]): CanMatchFn => {
-  return async (_route: Route, _segments: UrlSegment[]) => {
+  return async (_route: Route, segments: UrlSegment[]) => {
     const authService = inject(AuthService);
     const router = inject(Router);
 
     await authService.whenReady();
 
     if (!authService.isAuthenticated()) {
-      return router.createUrlTree(['/login']);
+      // Se conserva la URL pedida para volver a ella tras iniciar sesión.
+      const returnUrl = '/' + segments.map((s) => s.path).join('/');
+      return router.createUrlTree(['/login'], { queryParams: { returnUrl } });
     }
 
     const role = authService.role();
@@ -33,14 +43,14 @@ export const roleMatchGuard = (allowedRoles: readonly UserRole[]): CanMatchFn =>
 
 /** Barrera de vista del RBAC: redirige con `UrlTree` a `/login` o `/forbidden` si el rol no es válido. */
 export const roleActivateGuard = (allowedRoles: readonly UserRole[]): CanActivateFn => {
-  return async () => {
+  return async (_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     const authService = inject(AuthService);
     const router = inject(Router);
 
     await authService.whenReady();
 
     if (!authService.isAuthenticated()) {
-      return router.createUrlTree(['/login']);
+      return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
     }
 
     const role = authService.role();

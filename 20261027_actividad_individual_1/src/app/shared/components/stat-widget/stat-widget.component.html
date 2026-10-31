@@ -5,7 +5,9 @@
   (click)="selected.emit()"
 >
   @if (icon(); as iconName) {
-    <ion-icon class="stat-widget__icon" [name]="iconName" aria-hidden="true"></ion-icon>
+    <span class="stat-widget__icon" aria-hidden="true">
+      <ion-icon [name]="iconName"></ion-icon>
+    </span>
   }
   <span class="stat-widget__body">
     <span class="stat-widget__label">{{ label() }}</span>
