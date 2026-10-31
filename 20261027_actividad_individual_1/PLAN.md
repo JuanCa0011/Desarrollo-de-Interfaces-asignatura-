@@ -107,7 +107,7 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
   - Corregido contraste en modo oscuro: tokens propios `--app-surface`, `--app-text-muted`,
     `--app-danger-text` en `global.scss` (las variables `--ion-color-step-*` no estaban definidas).
 - **Fase 5:** Git flow, Compodoc, manual de usuario, despliegue en Vercel.
-  - **Compodoc** ✅: `npm run docs` genera `documentation/` (ignorada en Git) y `npm run docs:serve` la sirve
+  - **Compodoc** ✅: `npm run docs` genera `documentation/` (versionada en Git como entregable; regenerar con el mismo comando tras cambios) y `npm run docs:serve` la sirve
     en local. Usa `tsconfig.doc.json`. Cobertura de documentación: 98 % (JSDoc en servicios, guards,
     modelos, páginas y componentes compartidos).
   - Pendiente: manual de usuario, Git flow (`develop`) y despliegue en Vercel.

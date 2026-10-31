@@ -1,0 +1,780 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Librería DI 0488</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Librería DI 0488</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  MainLayoutPage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/core/layout/main-layout/main-layout.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Shell de navegación global (Paso 1.1): Side Menu con carga diferida de las secciones
+hijas a través del <code>&lt;ion-router-outlet&gt;</code> anidado. El enlace al panel de administración
+solo se muestra si <code>authService.isAdmin()</code>; el acceso real a la ruta está protegido
+además por los guards (<code>roleMatchGuard</code>/<code>roleActivateGuard</code>), no solo por esta
+ocultación visual.</p>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-main-layout</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/router/RouterLinkActive" target="_blank" >RouterLinkActive</a></code>
+</div>
+                        <div>    <code>IonSplitPane</code>
+</div>
+                        <div>    <code>IonMenu</code>
+</div>
+                        <div>    <code>IonHeader</code>
+</div>
+                        <div>    <code>IonToolbar</code>
+</div>
+                        <div>    <code>IonTitle</code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                        <div>    <code>IonList</code>
+</div>
+                        <div>    <code>IonItem</code>
+</div>
+                        <div>    <code>IonIcon</code>
+</div>
+                        <div>    <code>IonLabel</code>
+</div>
+                        <div>    <code>IonMenuToggle</code>
+</div>
+                        <div>    <code>IonRouterOutlet</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./main-layout.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./main-layout.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterLinkActive" target="_blank" >RouterLinkActive</a></code>
+                                </li>
+                                <li>
+                                        <code>IonSplitPane</code>
+                                </li>
+                                <li>
+                                        <code>IonMenu</code>
+                                </li>
+                                <li>
+                                        <code>IonHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonToolbar</code>
+                                </li>
+                                <li>
+                                        <code>IonTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                                <li>
+                                        <code>IonList</code>
+                                </li>
+                                <li>
+                                        <code>IonItem</code>
+                                </li>
+                                <li>
+                                        <code>IonIcon</code>
+                                </li>
+                                <li>
+                                        <code>IonLabel</code>
+                                </li>
+                                <li>
+                                        <code>IonMenuToggle</code>
+                                </li>
+                                <li>
+                                        <code>IonRouterOutlet</code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#logout" >logout</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/core/layout/main-layout/main-layout.page.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cierra la sesión en Supabase y navega a <code>/login</code>.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/core/layout/main-layout/main-layout.page.ts:57</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado de autenticación; muestra el enlace de administración solo a admins.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/core/layout/main-layout/main-layout.page.ts:59</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Router para redirigir al login tras cerrar sesión.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import { RouterLink, RouterLinkActive, Router } from &#x27;@angular/router&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import { libraryOutline, gridOutline, logOutOutline } from &#x27;ionicons/icons&#x27;;
+import {
+  IonSplitPane,
+  IonMenu,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonIcon,
+  IonLabel,
+  IonMenuToggle,
+  IonRouterOutlet,
+} from &#x27;@ionic/angular&#x27;;
+import { AuthService } from &#x27;../../services/auth.service&#x27;;
+
+addIcons({
+  &#x27;library-outline&#x27;: libraryOutline,
+  &#x27;grid-outline&#x27;: gridOutline,
+  &#x27;log-out-outline&#x27;: logOutOutline,
+});
+
+/**
+ * Shell de navegación global (Paso 1.1): Side Menu con carga diferida de las secciones
+ * hijas a través del &#x60;&lt;ion-router-outlet&gt;&#x60; anidado. El enlace al panel de administración
+ * solo se muestra si &#x60;authService.isAdmin()&#x60;; el acceso real a la ruta está protegido
+ * además por los guards (&#x60;roleMatchGuard&#x60;/&#x60;roleActivateGuard&#x60;), no solo por esta
+ * ocultación visual.
+ */
+@Component({
+  selector: &#x27;app-main-layout&#x27;,
+  templateUrl: &#x27;./main-layout.page.html&#x27;,
+  styleUrls: [&#x27;./main-layout.page.scss&#x27;],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    IonSplitPane,
+    IonMenu,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonItem,
+    IonIcon,
+    IonLabel,
+    IonMenuToggle,
+    IonRouterOutlet,
+  ],
+})
+export class MainLayoutPage {
+  /** Estado de autenticación; muestra el enlace de administración solo a admins. */
+  protected readonly authService &#x3D; inject(AuthService);
+  /** Router para redirigir al login tras cerrar sesión. */
+  private readonly router &#x3D; inject(Router);
+
+  /** Cierra la sesión en Supabase y navega a &#x60;/login&#x60;. */
+  public async logout(): Promise&lt;void&gt; {
+    await this.authService.logout();
+    void this.router.navigateByUrl(&#x27;/login&#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-split-pane contentId&#x3D;&quot;main-content&quot;&gt;
+  &lt;ion-menu contentId&#x3D;&quot;main-content&quot; type&#x3D;&quot;overlay&quot;&gt;
+    &lt;ion-header&gt;
+      &lt;ion-toolbar&gt;
+        &lt;ion-title&gt;Librería DI 0488&lt;/ion-title&gt;
+      &lt;/ion-toolbar&gt;
+    &lt;/ion-header&gt;
+    &lt;ion-content&gt;
+      &lt;ion-list&gt;
+        &lt;ion-menu-toggle autoHide&#x3D;&quot;false&quot;&gt;
+          &lt;ion-item
+            routerLink&#x3D;&quot;/&quot;
+            routerLinkActive&#x3D;&quot;selected&quot;
+            [routerLinkActiveOptions]&#x3D;&quot;{ exact: true }&quot;
+          &gt;
+            &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;library-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+            &lt;ion-label&gt;Catálogo&lt;/ion-label&gt;
+          &lt;/ion-item&gt;
+        &lt;/ion-menu-toggle&gt;
+
+        @if (authService.isAdmin()) {
+          &lt;ion-menu-toggle autoHide&#x3D;&quot;false&quot;&gt;
+            &lt;ion-item routerLink&#x3D;&quot;/admin&quot; routerLinkActive&#x3D;&quot;selected&quot;&gt;
+              &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;grid-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+              &lt;ion-label&gt;Panel de administración&lt;/ion-label&gt;
+            &lt;/ion-item&gt;
+          &lt;/ion-menu-toggle&gt;
+        }
+
+        &lt;ion-menu-toggle autoHide&#x3D;&quot;false&quot;&gt;
+          &lt;ion-item button&#x3D;&quot;true&quot; (click)&#x3D;&quot;logout()&quot;&gt;
+            &lt;ion-icon slot&#x3D;&quot;start&quot; name&#x3D;&quot;log-out-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+            &lt;ion-label&gt;Cerrar sesión&lt;/ion-label&gt;
+          &lt;/ion-item&gt;
+        &lt;/ion-menu-toggle&gt;
+      &lt;/ion-list&gt;
+    &lt;/ion-content&gt;
+  &lt;/ion-menu&gt;
+
+  &lt;ion-router-outlet id&#x3D;&quot;main-content&quot;&gt;&lt;/ion-router-outlet&gt;
+&lt;/ion-split-pane&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./main-layout.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.08);
+  --color: var(--ion-color-primary, #3880ff);
+  font-weight: 600;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-split-pane contentId="main-content">  <ion-menu contentId="main-content" type="overlay">    <ion-header>      <ion-toolbar>        <ion-title>Librería DI 0488</ion-title>      </ion-toolbar>    </ion-header>    <ion-content>      <ion-list>        <ion-menu-toggle autoHide="false">          <ion-item            routerLink="/"            routerLinkActive="selected"            [routerLinkActiveOptions]="{ exact: true }"          >            <ion-icon slot="start" name="library-outline" aria-hidden="true"></ion-icon>            <ion-label>Catálogo</ion-label>          </ion-item>        </ion-menu-toggle>        @if (authService.isAdmin()) {          <ion-menu-toggle autoHide="false">            <ion-item routerLink="/admin" routerLinkActive="selected">              <ion-icon slot="start" name="grid-outline" aria-hidden="true"></ion-icon>              <ion-label>Panel de administración</ion-label>            </ion-item>          </ion-menu-toggle>        }        <ion-menu-toggle autoHide="false">          <ion-item button="true" (click)="logout()">            <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>            <ion-label>Cerrar sesión</ion-label>          </ion-item>        </ion-menu-toggle>      </ion-list>    </ion-content>  </ion-menu>  <ion-router-outlet id="main-content"></ion-router-outlet></ion-split-pane></div>'
+    var COMPONENTS = [{'name': 'AdminDashboardPage', 'selector': 'app-admin-dashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BookDataTableComponent', 'selector': 'app-book-data-table'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ForbiddenPage', 'selector': 'app-forbidden'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MainLayoutPage', 'selector': 'app-main-layout'},{'name': 'NotFoundPage', 'selector': 'app-not-found'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MainLayoutPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MainLayoutPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

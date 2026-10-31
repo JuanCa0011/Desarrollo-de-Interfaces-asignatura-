@@ -73,5 +73,3 @@ Thumbs.db
 /src/environments/environment.ts
 /src/environments/environment.prod.ts
 
-# Documentación generada (npm run docs)
-/documentation
