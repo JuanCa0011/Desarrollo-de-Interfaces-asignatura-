@@ -131,6 +131,10 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
     Verificado en producción: login con `returnUrl`, RBAC (403 a usuario estándar), exportaciones PDF/CSV,
     email duplicado en el registro y Lighthouse 100/100. Configuración usada:
     - `vercel.json`: `npm ci`, `npm run build:vercel`, salida `www`, reescritura de rutas a `index.html` (SPA).
+    - Datos de ejemplo: `scripts/seed-ventas.mjs` insertó 20 ventas (567,45 EUR, últimos ~4 meses) a nombre de la
+      cuenta admin, porque la RLS de `ventas` no deja insertar con `usuario_id` vacío ni con otro usuario.
+      Con ellas el gráfico de ingresos y el informe de ventas muestran datos. Para quitarlas:
+      `delete from public.ventas where usuario_id = (select id from auth.users where email = 'juan_libreria_admin@gmail.com');`
     - `scripts/set-env.mjs` genera `environment.ts`/`environment.prod.ts` desde `SUPABASE_URL` y `SUPABASE_KEY`.
     - Pasos: Import Project → repo `Desarrollo-de-Interfaces-asignatura-` → *Root Directory*
       `20261027_actividad_individual_1` → rama a desplegar → *Environment Variables*
