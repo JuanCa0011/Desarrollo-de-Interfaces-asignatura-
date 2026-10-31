@@ -128,7 +128,7 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
 - [ ] URL del repositorio (con historial de ramas)
 - [ ] URL de la app en producción (Vercel)
 - [ ] Credenciales de prueba (admin / usuario estándar)
-- [ ] Informe Lighthouse (Accessibility y Best Practices ≥ 90)
+- [x] Informe Lighthouse (Accessibility y Best Practices ≥ 90): [`docs/lighthouse/`](docs/lighthouse/README.md)
 - [ ] Documentación técnica (Compodoc) + Manual de Usuario
 
 ## 7. Limitaciones conocidas del entorno
