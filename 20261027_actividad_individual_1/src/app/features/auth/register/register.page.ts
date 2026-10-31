@@ -10,6 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
+  IonButtons,
   IonTitle,
   IonContent,
   IonItem,
@@ -21,6 +22,7 @@ import {
 import { AuthService } from '../../../core/services/auth.service';
 import { ComponentCanDeactivate } from '../../../core/guards/pending-changes.guard';
 import { emailExistsValidator } from '../../../core/validators/email-exists.validator';
+import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/theme-toggle.component';
 
 function passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
   const password = group.get('password')?.value;
@@ -33,6 +35,8 @@ function passwordsMatchValidator(group: AbstractControl): ValidationErrors | nul
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   imports: [
+    ThemeToggleComponent,
+    IonButtons,
     ReactiveFormsModule,
     RouterLink,
     IonHeader,

@@ -27,15 +27,6 @@
           </ion-menu-toggle>
         }
 
-        <ion-item button="true" (click)="theme.toggle()" [attr.aria-pressed]="theme.isDark()">
-          <ion-icon
-            slot="start"
-            [name]="theme.isDark() ? 'sunny-outline' : 'moon-outline'"
-            aria-hidden="true"
-          ></ion-icon>
-          <ion-label>{{ theme.label() }}</ion-label>
-        </ion-item>
-
         <ion-menu-toggle autoHide="false">
           <ion-item button="true" (click)="logout()">
             <ion-icon slot="start" name="log-out-outline" aria-hidden="true"></ion-icon>

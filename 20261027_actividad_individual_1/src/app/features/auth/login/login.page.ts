@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
+  IonButtons,
   IonTitle,
   IonContent,
   IonItem,
@@ -12,12 +13,15 @@ import {
   IonText,
 } from '@ionic/angular';
 import { AuthService } from '../../../core/services/auth.service';
+import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   imports: [
+    ThemeToggleComponent,
+    IonButtons,
     ReactiveFormsModule,
     RouterLink,
     IonHeader,

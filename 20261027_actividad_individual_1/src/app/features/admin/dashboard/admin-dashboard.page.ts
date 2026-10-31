@@ -19,6 +19,7 @@ import { Libro, Resena, VentaConLibro } from '../../../core/models/database.mode
 import { StatWidgetComponent } from '../../../shared/components/stat-widget/stat-widget.component';
 import { BookDataTableComponent } from '../../../shared/components/book-data-table/book-data-table.component';
 import { ChartCardComponent } from '../../../shared/components/chart-card/chart-card.component';
+import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/theme-toggle.component';
 
 /**
  * Dashboard de administración: widgets, gráficos Chart.js, reseñas en tiempo real
@@ -31,6 +32,7 @@ import { ChartCardComponent } from '../../../shared/components/chart-card/chart-
   styleUrls: ['./admin-dashboard.page.scss'],
   providers: [CurrencyPipe],
   imports: [
+    ThemeToggleComponent,
     DatePipe,
     IonHeader,
     IonToolbar,
