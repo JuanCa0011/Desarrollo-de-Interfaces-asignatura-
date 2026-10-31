@@ -52,6 +52,11 @@ export class MainLayoutPage {
     () => (this.authService.profile()?.nombre ?? 'U').trim().charAt(0) || 'U',
   );
 
+  /** Nombre del usuario dividido antes de la `@`, para que un email largo salte de línea de forma limpia. */
+  protected readonly nameParts = computed(() =>
+    (this.authService.profile()?.nombre ?? 'Usuario').split(/(?=@)/),
+  );
+
   /** Cierra la sesión en Supabase y navega a `/login`. */
   public async logout(): Promise<void> {
     await this.authService.logout();

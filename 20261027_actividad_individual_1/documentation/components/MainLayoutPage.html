@@ -313,6 +313,12 @@ ocultación visual.</p>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#nameParts" >nameParts</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#router" >router</a>
@@ -382,8 +388,8 @@ ocultación visual.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">src/app/core/layout/main-layout/main-layout.page.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/core/layout/main-layout/main-layout.page.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -492,6 +498,47 @@ ocultación visual.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="nameParts"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>nameParts</b></span>
+                        <a href="#nameParts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt;
+    (this.authService.profile()?.nombre ?? &#x27;Usuario&#x27;).split(/(?&#x3D;@)/),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/core/layout/main-layout/main-layout.page.ts:56</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nombre del usuario dividido antes de la <code>@</code>, para que un email largo salte de línea de forma limpia.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="router"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
@@ -587,6 +634,11 @@ export class MainLayoutPage {
     () &#x3D;&gt; (this.authService.profile()?.nombre ?? &#x27;U&#x27;).trim().charAt(0) || &#x27;U&#x27;,
   );
 
+  /** Nombre del usuario dividido antes de la &#x60;@&#x60;, para que un email largo salte de línea de forma limpia. */
+  protected readonly nameParts &#x3D; computed(() &#x3D;&gt;
+    (this.authService.profile()?.nombre ?? &#x27;Usuario&#x27;).split(/(?&#x3D;@)/),
+  );
+
   /** Cierra la sesión en Supabase y navega a &#x60;/login&#x60;. */
   public async logout(): Promise&lt;void&gt; {
     await this.authService.logout();
@@ -642,16 +694,21 @@ export class MainLayoutPage {
         &lt;/nav&gt;
 
         &lt;div class&#x3D;&quot;side-menu__user&quot;&gt;
-          &lt;span class&#x3D;&quot;side-menu__avatar&quot; aria-hidden&#x3D;&quot;true&quot;&gt;{{ initial() }}&lt;/span&gt;
-          &lt;span class&#x3D;&quot;side-menu__user-info&quot;&gt;
-            &lt;span class&#x3D;&quot;side-menu__user-name&quot;&gt;{{ authService.profile()?.nombre ?? &#x27;Usuario&#x27; }}&lt;/span&gt;
-            &lt;span class&#x3D;&quot;side-menu__role&quot;&gt;
-              {{ authService.isAdmin() ? &#x27;Administrador&#x27; : &#x27;Usuario estándar&#x27; }}
+          &lt;div class&#x3D;&quot;side-menu__user-row&quot;&gt;
+            &lt;span class&#x3D;&quot;side-menu__avatar&quot; aria-hidden&#x3D;&quot;true&quot;&gt;{{ initial() }}&lt;/span&gt;
+            &lt;span class&#x3D;&quot;side-menu__user-info&quot;&gt;
+              &lt;span class&#x3D;&quot;side-menu__user-name&quot;&gt;
+                @for (part of nameParts(); track $index) {&lt;span&gt;{{ part }}&lt;/span&gt;&lt;wbr /&gt;}
+              &lt;/span&gt;
+              &lt;span class&#x3D;&quot;side-menu__role&quot;&gt;
+                {{ authService.isAdmin() ? &#x27;Administrador&#x27; : &#x27;Usuario estándar&#x27; }}
+              &lt;/span&gt;
             &lt;/span&gt;
-          &lt;/span&gt;
+          &lt;/div&gt;
           &lt;ion-menu-toggle autoHide&#x3D;&quot;false&quot;&gt;
-            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;side-menu__logout&quot; aria-label&#x3D;&quot;Cerrar sesión&quot; (click)&#x3D;&quot;logout()&quot;&gt;
+            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;side-menu__logout&quot; (click)&#x3D;&quot;logout()&quot;&gt;
               &lt;ion-icon name&#x3D;&quot;log-out-outline&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+              Cerrar sesión
             &lt;/button&gt;
           &lt;/ion-menu-toggle&gt;
         &lt;/div&gt;
@@ -668,8 +725,20 @@ export class MainLayoutPage {
                 <p class="comment">
                     <code>./main-layout.page.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.side-menu {
-  --width: 264px;
+                <pre class="line-numbers"><code class="language-scss">/*
+ * Ancho del menú &#x3D; enlace más largo («Panel de administración», 241 px con icono y relleno)
+ * + relleno lateral (28 px). Ionic ignora &#x60;--width&#x60; del ion-menu dentro del split-pane
+ * (usa 28 % del ancho de la ventana), por eso se fija también en el propio split-pane.
+ */
+ion-split-pane {
+  --side-width: 272px;
+  --side-min-width: 272px;
+  --side-max-width: 272px;
+}
+
+.side-menu {
+  --width: 272px;
+  --max-width: 85vw;
   --background: var(--app-surface);
   --border: 1px solid var(--app-border);
 
@@ -761,13 +830,19 @@ export class MainLayoutPage {
 
   &amp;__user {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
     margin-top: auto;
     padding: 12px;
     border: 1px solid var(--app-border);
     border-radius: 14px;
     background: var(--ion-background-color);
+  }
+
+  &amp;__user-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   &amp;__avatar {
@@ -791,11 +866,10 @@ export class MainLayoutPage {
   }
 
   &amp;__user-name {
-    overflow: hidden;
     font-size: 0.85rem;
     font-weight: 700;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
   }
 
   &amp;__role {
@@ -804,16 +878,27 @@ export class MainLayoutPage {
   }
 
   &amp;__logout {
-    display: grid;
-    place-items: center;
-    width: 38px;
-    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% + 24px);
+    min-height: 42px;
+    margin: 0 -12px -12px;
+    padding: 0 12px;
     border: 0;
-    border-radius: 10px;
-    font-size: 1.2rem;
+    border-top: 1px solid var(--app-border);
+    border-radius: 0 0 10px 10px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--app-text-muted);
     background: transparent;
     cursor: pointer;
+
+    ion-icon {
+      font-size: 1.15rem;
+    }
 
     &amp;:hover {
       color: var(--app-danger-text);
@@ -822,6 +907,7 @@ export class MainLayoutPage {
 
     &amp;:focus-visible {
       outline: 3px solid var(--ion-color-primary);
+      outline-offset: -3px;
     }
   }
 }
@@ -853,7 +939,7 @@ export class MainLayoutPage {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-split-pane contentId="main-content">  <ion-menu contentId="main-content" type="overlay" class="side-menu">    <ion-content class="side-menu__content">      <div class="side-menu__inner">        <a class="side-menu__brand" routerLink="/" aria-label="Librería, ir al catálogo">          <span class="side-menu__logo" aria-hidden="true">            <ion-icon name="book-outline"></ion-icon>          </span>          <span class="side-menu__name">Librería</span>        </a>        <nav aria-label="Navegación principal">          <ul class="side-menu__list">            <li>              <ion-menu-toggle autoHide="false">                <a                  class="side-menu__link"                  routerLink="/"                  routerLinkActive="side-menu__link--active"                  [routerLinkActiveOptions]="{ exact: true }"                >                  <ion-icon name="library-outline" aria-hidden="true"></ion-icon>                  <span>Catálogo</span>                </a>              </ion-menu-toggle>            </li>            @if (authService.isAdmin()) {              <li>                <ion-menu-toggle autoHide="false">                  <a                    class="side-menu__link"                    routerLink="/admin"                    routerLinkActive="side-menu__link--active"                  >                    <ion-icon name="grid-outline" aria-hidden="true"></ion-icon>                    <span>Panel de administración</span>                  </a>                </ion-menu-toggle>              </li>            }          </ul>        </nav>        <div class="side-menu__user">          <span class="side-menu__avatar" aria-hidden="true">{{ initial() }}</span>          <span class="side-menu__user-info">            <span class="side-menu__user-name">{{ authService.profile()?.nombre ?? \'Usuario\' }}</span>            <span class="side-menu__role">              {{ authService.isAdmin() ? \'Administrador\' : \'Usuario estándar\' }}            </span>          </span>          <ion-menu-toggle autoHide="false">            <button type="button" class="side-menu__logout" aria-label="Cerrar sesión" (click)="logout()">              <ion-icon name="log-out-outline" aria-hidden="true"></ion-icon>            </button>          </ion-menu-toggle>        </div>      </div>    </ion-content>  </ion-menu>  <ion-router-outlet id="main-content"></ion-router-outlet></ion-split-pane></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-split-pane contentId="main-content">  <ion-menu contentId="main-content" type="overlay" class="side-menu">    <ion-content class="side-menu__content">      <div class="side-menu__inner">        <a class="side-menu__brand" routerLink="/" aria-label="Librería, ir al catálogo">          <span class="side-menu__logo" aria-hidden="true">            <ion-icon name="book-outline"></ion-icon>          </span>          <span class="side-menu__name">Librería</span>        </a>        <nav aria-label="Navegación principal">          <ul class="side-menu__list">            <li>              <ion-menu-toggle autoHide="false">                <a                  class="side-menu__link"                  routerLink="/"                  routerLinkActive="side-menu__link--active"                  [routerLinkActiveOptions]="{ exact: true }"                >                  <ion-icon name="library-outline" aria-hidden="true"></ion-icon>                  <span>Catálogo</span>                </a>              </ion-menu-toggle>            </li>            @if (authService.isAdmin()) {              <li>                <ion-menu-toggle autoHide="false">                  <a                    class="side-menu__link"                    routerLink="/admin"                    routerLinkActive="side-menu__link--active"                  >                    <ion-icon name="grid-outline" aria-hidden="true"></ion-icon>                    <span>Panel de administración</span>                  </a>                </ion-menu-toggle>              </li>            }          </ul>        </nav>        <div class="side-menu__user">          <div class="side-menu__user-row">            <span class="side-menu__avatar" aria-hidden="true">{{ initial() }}</span>            <span class="side-menu__user-info">              <span class="side-menu__user-name">                @for (part of nameParts(); track $index) {<span>{{ part }}</span><wbr />}              </span>              <span class="side-menu__role">                {{ authService.isAdmin() ? \'Administrador\' : \'Usuario estándar\' }}              </span>            </span>          </div>          <ion-menu-toggle autoHide="false">            <button type="button" class="side-menu__logout" (click)="logout()">              <ion-icon name="log-out-outline" aria-hidden="true"></ion-icon>              Cerrar sesión            </button>          </ion-menu-toggle>        </div>      </div>    </ion-content>  </ion-menu>  <ion-router-outlet id="main-content"></ion-router-outlet></ion-split-pane></div>'
     var COMPONENTS = [{'name': 'AdminDashboardPage', 'selector': 'app-admin-dashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BookCardComponent', 'selector': 'app-book-card'},{'name': 'BookCoverComponent', 'selector': 'app-book-cover'},{'name': 'BookDataTableComponent', 'selector': 'app-book-data-table'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ForbiddenPage', 'selector': 'app-forbidden'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MainLayoutPage', 'selector': 'app-main-layout'},{'name': 'NotFoundPage', 'selector': 'app-not-found'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MainLayoutPage'};

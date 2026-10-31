@@ -104,7 +104,7 @@ En pantallas grandes, el menú está siempre visible a la izquierda. Contiene:
 - **Catálogo:** el escaparate de libros. La sección en la que estás aparece resaltada.
 - **Panel de administración:** solo aparece si eres administrador.
 - **Tarjeta de usuario** (abajo): tu nombre, tu rol (*Usuario estándar* o *Administrador*) y el
-  botón de salida para **cerrar sesión**, que te lleva de nuevo al login.
+  botón **Cerrar sesión**, que te lleva de nuevo al login.
 
 Si un usuario estándar intenta abrir el panel de administración escribiendo su dirección, verá la
 página **403 · Acceso denegado**. Si la dirección no existe, verá la página **404 · Página no

@@ -43,16 +43,21 @@
         </nav>
 
         <div class="side-menu__user">
-          <span class="side-menu__avatar" aria-hidden="true">{{ initial() }}</span>
-          <span class="side-menu__user-info">
-            <span class="side-menu__user-name">{{ authService.profile()?.nombre ?? 'Usuario' }}</span>
-            <span class="side-menu__role">
-              {{ authService.isAdmin() ? 'Administrador' : 'Usuario estándar' }}
+          <div class="side-menu__user-row">
+            <span class="side-menu__avatar" aria-hidden="true">{{ initial() }}</span>
+            <span class="side-menu__user-info">
+              <span class="side-menu__user-name">
+                @for (part of nameParts(); track $index) {<span>{{ part }}</span><wbr />}
+              </span>
+              <span class="side-menu__role">
+                {{ authService.isAdmin() ? 'Administrador' : 'Usuario estándar' }}
+              </span>
             </span>
-          </span>
+          </div>
           <ion-menu-toggle autoHide="false">
-            <button type="button" class="side-menu__logout" aria-label="Cerrar sesión" (click)="logout()">
+            <button type="button" class="side-menu__logout" (click)="logout()">
               <ion-icon name="log-out-outline" aria-hidden="true"></ion-icon>
+              Cerrar sesión
             </button>
           </ion-menu-toggle>
         </div>

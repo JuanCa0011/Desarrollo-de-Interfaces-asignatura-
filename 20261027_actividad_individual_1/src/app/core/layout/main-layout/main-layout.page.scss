@@ -1,5 +1,17 @@
+/*
+ * Ancho del menú = enlace más largo («Panel de administración», 241 px con icono y relleno)
+ * + relleno lateral (28 px). Ionic ignora `--width` del ion-menu dentro del split-pane
+ * (usa 28 % del ancho de la ventana), por eso se fija también en el propio split-pane.
+ */
+ion-split-pane {
+  --side-width: 272px;
+  --side-min-width: 272px;
+  --side-max-width: 272px;
+}
+
 .side-menu {
-  --width: 264px;
+  --width: 272px;
+  --max-width: 85vw;
   --background: var(--app-surface);
   --border: 1px solid var(--app-border);
 
@@ -91,13 +103,19 @@
 
   &__user {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
     margin-top: auto;
     padding: 12px;
     border: 1px solid var(--app-border);
     border-radius: 14px;
     background: var(--ion-background-color);
+  }
+
+  &__user-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   &__avatar {
@@ -121,11 +139,10 @@
   }
 
   &__user-name {
-    overflow: hidden;
     font-size: 0.85rem;
     font-weight: 700;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
   }
 
   &__role {
@@ -134,16 +151,27 @@
   }
 
   &__logout {
-    display: grid;
-    place-items: center;
-    width: 38px;
-    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% + 24px);
+    min-height: 42px;
+    margin: 0 -12px -12px;
+    padding: 0 12px;
     border: 0;
-    border-radius: 10px;
-    font-size: 1.2rem;
+    border-top: 1px solid var(--app-border);
+    border-radius: 0 0 10px 10px;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--app-text-muted);
     background: transparent;
     cursor: pointer;
+
+    ion-icon {
+      font-size: 1.15rem;
+    }
 
     &:hover {
       color: var(--app-danger-text);
@@ -152,6 +180,7 @@
 
     &:focus-visible {
       outline: 3px solid var(--ion-color-primary);
+      outline-offset: -3px;
     }
   }
 }
