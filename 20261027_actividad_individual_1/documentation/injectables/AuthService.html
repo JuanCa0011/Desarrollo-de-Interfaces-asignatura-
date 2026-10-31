@@ -387,8 +387,8 @@ refresco de página mientras Supabase todavía está restaurando el token guarda
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:111</a></div>
                         </td>
                     </tr>
 
@@ -459,8 +459,8 @@ refresco de página mientras Supabase todavía está restaurando el token guarda
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:89</a></div>
                         </td>
                     </tr>
 
@@ -531,8 +531,8 @@ refresco de página mientras Supabase todavía está restaurando el token guarda
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -573,8 +573,8 @@ refresco de página mientras Supabase todavía está restaurando el token guarda
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="116"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:116</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:121</a></div>
                         </td>
                     </tr>
 
@@ -729,8 +729,8 @@ refresco de página mientras Supabase todavía está restaurando el token guarda
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:84</a></div>
                         </td>
                     </tr>
 
@@ -771,8 +771,8 @@ refresco de página mientras Supabase todavía está restaurando el token guarda
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/core/services/auth.service.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/core/services/auth.service.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -1421,7 +1421,12 @@ export class AuthService {
 
   /** Inicia sesión con email y contraseña; devuelve el mensaje de error de Supabase o &#x60;null&#x60;. */
   public async login(email: string, password: string): Promise&lt;{ error: string | null }&gt; {
-    const { error } &#x3D; await this.supabase.auth.signInWithPassword({ email, password });
+    const { data, error } &#x3D; await this.supabase.auth.signInWithPassword({ email, password });
+    if (!error &amp;&amp; data.session) {
+      // Se espera al perfil (rol) antes de navegar: si no, los guards RBAC verían rol vacío
+      // y mandarían a un administrador a /forbidden al entrar en una ruta protegida.
+      await this.applySession(data.session);
+    }
     return { error: error?.message ?? null };
   }
 

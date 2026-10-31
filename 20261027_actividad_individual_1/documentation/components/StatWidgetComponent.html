@@ -645,9 +645,10 @@ export class StatWidgetComponent {
 
   &amp;__value {
     font-family: var(--app-font-display);
-    font-size: 1.9rem;
+    font-size: clamp(1.5rem, 2.2vw, 1.9rem);
     font-weight: 700;
     line-height: 1.15;
+    white-space: nowrap;
   }
 
   &amp;__hint {

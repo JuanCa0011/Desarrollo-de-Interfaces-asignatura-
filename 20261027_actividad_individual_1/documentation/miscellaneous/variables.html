@@ -340,14 +340,14 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(allowedRoles: readonly UserRole[]): CanActivateFn &#x3D;&gt; {
-  return async () &#x3D;&gt; {
+  return async (_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) &#x3D;&gt; {
     const authService &#x3D; inject(AuthService);
     const router &#x3D; inject(Router);
 
     await authService.whenReady();
 
     if (!authService.isAuthenticated()) {
-      return router.createUrlTree([&#x27;/login&#x27;]);
+      return router.createUrlTree([&#x27;/login&#x27;], { queryParams: { returnUrl: state.url } });
     }
 
     const role &#x3D; authService.role();
@@ -390,14 +390,16 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(allowedRoles: readonly UserRole[]): CanMatchFn &#x3D;&gt; {
-  return async (_route: Route, _segments: UrlSegment[]) &#x3D;&gt; {
+  return async (_route: Route, segments: UrlSegment[]) &#x3D;&gt; {
     const authService &#x3D; inject(AuthService);
     const router &#x3D; inject(Router);
 
     await authService.whenReady();
 
     if (!authService.isAuthenticated()) {
-      return router.createUrlTree([&#x27;/login&#x27;]);
+      // Se conserva la URL pedida para volver a ella tras iniciar sesión.
+      const returnUrl &#x3D; &#x27;/&#x27; + segments.map((s) &#x3D;&gt; s.path).join(&#x27;/&#x27;);
+      return router.createUrlTree([&#x27;/login&#x27;], { queryParams: { returnUrl } });
     }
 
     const role &#x3D; authService.role();

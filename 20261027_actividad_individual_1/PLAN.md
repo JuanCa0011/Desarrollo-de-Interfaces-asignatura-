@@ -113,6 +113,11 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
   - Login/registro en diseño partido; menú lateral con marca y tarjeta de usuario.
   - Dashboard bento: KPI planos, circulares con top 5 + «Otros», reseñas en directo y tabla en panel.
   - Lighthouse tras el rediseño (claro y oscuro): Accesibilidad 100 / Buenas prácticas 100.
+  - Correcciones de comportamiento detectadas al verificar el manual en la app real: el login conserva
+    `returnUrl` también en rutas de rol (`roleMatchGuard`/`roleActivateGuard`), y `AuthService.login()` espera
+    a cargar el perfil antes de navegar (antes un admin que entraba a `/admin` acababa en `/forbidden`).
+  - Manual de usuario reescrito con 12 capturas del diseño actual (`docs/manual/img/`) y afirmaciones
+    verificadas con navegador automatizado (login con returnUrl, exportaciones, RBAC, filtros, tema).
 - **Fase 5:** Git flow, Compodoc, manual de usuario, despliegue en Vercel.
   - **Compodoc** ✅: `npm run docs` genera `documentation/` (versionada en Git como entregable; regenerar con el mismo comando tras cambios) y `npm run docs:serve` la sirve
     en local. Usa `tsconfig.doc.json`. Cobertura de documentación: 98 % (JSDoc en servicios, guards,
