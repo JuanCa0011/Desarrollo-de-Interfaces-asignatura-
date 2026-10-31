@@ -1,6 +1,6 @@
 # Informes Lighthouse
 
-Auditoría sobre el build de producción (`ng build`) servido en local, con Chrome headless.
+Auditoría sobre la **aplicación desplegada en producción** (https://actividadindividual1.vercel.app), con Chrome headless.
 Las páginas protegidas se auditaron con la sesión del administrador ya iniciada.
 
 | Página | Accesibilidad | Buenas prácticas | Informe |

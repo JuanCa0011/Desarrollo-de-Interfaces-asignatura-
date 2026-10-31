@@ -127,7 +127,9 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
   - **Git flow** ✅: `develop` recibe `feature/actividad1-setup` con merge `--no-ff`; ramas subidas a GitHub.
     Trabajar en `develop`/`feature/*`: en `main` los `environment*.ts` antiguos siguen versionados y
     cambiar a esa rama sobrescribe los locales (hay que regenerarlos con `scripts/set-env.mjs`).
-  - **Vercel** (configuración lista, falta conectar el repo en vercel.com):
+  - **Vercel** ✅ desplegado en <https://actividadindividual1.vercel.app> (variables `SUPABASE_URL` y `SUPABASE_KEY` configuradas en Vercel).
+    Verificado en producción: login con `returnUrl`, RBAC (403 a usuario estándar), exportaciones PDF/CSV,
+    email duplicado en el registro y Lighthouse 100/100. Configuración usada:
     - `vercel.json`: `npm ci`, `npm run build:vercel`, salida `www`, reescritura de rutas a `index.html` (SPA).
     - `scripts/set-env.mjs` genera `environment.ts`/`environment.prod.ts` desde `SUPABASE_URL` y `SUPABASE_KEY`.
     - Pasos: Import Project → repo `Desarrollo-de-Interfaces-asignatura-` → *Root Directory*
@@ -137,11 +139,11 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
 
 ## 6. Checklist de entregables finales
 
-- [ ] URL del repositorio (con historial de ramas)
-- [ ] URL de la app en producción (Vercel)
-- [ ] Credenciales de prueba (admin / usuario estándar)
+- [x] URL del repositorio (con historial de ramas): <https://github.com/JuanCa0011/Desarrollo-de-Interfaces-asignatura->
+- [x] URL de la app en producción (Vercel): <https://actividadindividual1.vercel.app>
+- [x] Credenciales de prueba (admin / usuario estándar): ver [manual de usuario](docs/manual/MANUAL_USUARIO.md#1-cuentas-de-prueba)
 - [x] Informe Lighthouse (Accessibility y Best Practices ≥ 90): [`docs/lighthouse/`](docs/lighthouse/README.md)
-- [ ] Documentación técnica (Compodoc) + Manual de Usuario
+- [x] Documentación técnica (Compodoc, `documentation/`) + Manual de Usuario (`docs/manual/`)
 
 ## 7. Limitaciones conocidas del entorno
 
