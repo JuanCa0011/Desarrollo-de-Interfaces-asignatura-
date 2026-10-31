@@ -98,8 +98,11 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
   - Botón de menú (`ion-menu-button`) en móvil, `h1` por página (`.sr-only`), etiquetas asociadas
     con `label`/`labelPlacement` en `ion-input`, foco visible global y `prefers-reduced-motion`.
   - Tabla con `caption`, `scope` y `aria-sort`; gráficos con `role="img"` y `aria-label`.
-  - Lighthouse sobre `/login`: Accesibilidad 100, Buenas prácticas 100. Las rutas protegidas
-    requieren sesión y se auditarán cuando el login esté resuelto.
+  - Lighthouse (build de producción, sesión admin iniciada con navegador automatizado):
+    `/login`, `/` (Catálogo) y `/admin` → Accesibilidad 100, Buenas prácticas 100.
+    Único aviso: source maps ausentes en el JS de producción (no afecta a la puntuación).
+  - Corregido contraste en modo oscuro: tokens propios `--app-surface`, `--app-text-muted`,
+    `--app-danger-text` en `global.scss` (las variables `--ion-color-step-*` no estaban definidas).
 - **Fase 5:** Git flow, Compodoc, manual de usuario, despliegue en Vercel.
 
 ## 6. Checklist de entregables finales

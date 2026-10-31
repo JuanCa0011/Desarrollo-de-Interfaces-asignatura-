@@ -21,7 +21,7 @@
     td {
       padding: 10px 12px;
       text-align: left;
-      border-bottom: 1px solid var(--ion-color-step-150, #d9d9d9);
+      border-bottom: 1px solid var(--app-border);
     }
   }
 
@@ -29,7 +29,7 @@
     padding: 8px 12px;
     text-align: left;
     font-weight: 600;
-    color: var(--ion-color-step-700, #444);
+    color: var(--app-text-muted);
   }
 
   &__th--numeric,
@@ -57,18 +57,18 @@
     cursor: pointer;
 
     &:hover {
-      background: var(--ion-color-step-100, #eee);
+      background: var(--app-surface-hover);
     }
 
     &:focus-visible {
       outline: none;
-      background: var(--ion-color-step-100, #eee);
+      background: var(--app-surface-hover);
       box-shadow: inset 0 0 0 2px var(--ion-color-primary);
     }
   }
 
   &__cell--low {
-    color: var(--ion-color-danger-shade, #c5000f);
+    color: var(--app-danger-text);
     font-weight: 700;
   }
 

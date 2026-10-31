@@ -33,7 +33,7 @@ Chart.register(...registerables);
       margin: 0;
       padding: 16px;
       border-radius: 8px;
-      background: var(--ion-color-step-50, #f4f5f8);
+      background: var(--app-surface);
     }
     .chart-card__title {
       margin-bottom: 8px;
