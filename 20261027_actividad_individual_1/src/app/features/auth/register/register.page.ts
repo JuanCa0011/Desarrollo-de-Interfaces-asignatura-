@@ -13,12 +13,14 @@ import {
   IonButtons,
   IonTitle,
   IonContent,
-  IonItem,
+  IonIcon,
   IonInput,
+  IonInputPasswordToggle,
   IonButton,
-  IonText,
   IonSpinner,
 } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { bookOutline } from 'ionicons/icons';
 import { AuthService } from '../../../core/services/auth.service';
 import { ComponentCanDeactivate } from '../../../core/guards/pending-changes.guard';
 import { emailExistsValidator } from '../../../core/validators/email-exists.validator';
@@ -31,11 +33,13 @@ function passwordsMatchValidator(group: AbstractControl): ValidationErrors | nul
   return password === confirmPassword ? null : { passwordsMismatch: true };
 }
 
+addIcons({ 'book-outline': bookOutline });
+
 /** Página de registro con validación asíncrona de email duplicado y protección de cambios sin guardar. */
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  styleUrls: ['../auth.shared.scss'],
   imports: [
     ThemeToggleComponent,
     IonButtons,
@@ -45,10 +49,10 @@ function passwordsMatchValidator(group: AbstractControl): ValidationErrors | nul
     IonToolbar,
     IonTitle,
     IonContent,
-    IonItem,
+    IonIcon,
+    IonInputPasswordToggle,
     IonInput,
     IonButton,
-    IonText,
     IonSpinner,
   ],
 })

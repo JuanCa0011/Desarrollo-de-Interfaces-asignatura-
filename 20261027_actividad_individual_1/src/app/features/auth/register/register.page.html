@@ -7,94 +7,131 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <h1 class="sr-only">Crear cuenta</h1>
-  @if (registered()) {
-    <ion-text color="success" role="status">
-      <p>
-        ¡Cuenta creada! Si tu proyecto requiere confirmación por email, revisa tu bandeja de
-        entrada antes de iniciar sesión.
-      </p>
-    </ion-text>
-    <ion-button expand="block" routerLink="/login">Ir a iniciar sesión</ion-button>
-  } @else {
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate aria-label="Formulario de registro">
-      <ion-item>
-        <ion-input label="Nombre completo" labelPlacement="stacked" formControlName="nombre" autocomplete="name" required aria-required="true"></ion-input>
-      </ion-item>
-      @if (form.controls.nombre.invalid && form.controls.nombre.touched) {
-        <ion-text color="danger" role="alert">
-          <p>Introduce tu nombre (mínimo 2 caracteres).</p>
-        </ion-text>
-      }
+<ion-content>
+  <div class="auth">
+    <aside class="auth__hero">
+      <div class="auth__brand">
+        <span class="auth__logo" aria-hidden="true"><ion-icon name="book-outline"></ion-icon></span>
+        Librería
+      </div>
+      <p class="auth__headline">Únete y descubre tu próxima lectura.</p>
+      <ul class="auth__points">
+        <li>✅ Registro en menos de un minuto</li>
+        <li>🔎 Busca entre todos los títulos</li>
+        <li>🔒 Tus datos protegidos con Supabase</li>
+      </ul>
+    </aside>
 
-      <ion-item>
-        <ion-input label="Email" labelPlacement="stacked"
-          type="email"
-          formControlName="email"
-          autocomplete="email"
-          inputmode="email"
-          required
-          aria-required="true"
-        ></ion-input>
-        @if (form.controls.email.pending) {
-          <ion-spinner slot="end" name="dots" aria-label="Comprobando disponibilidad del email"></ion-spinner>
+    <section class="auth__panel">
+      <div class="auth__card">
+        @if (registered()) {
+          <h1 class="auth__title">¡Cuenta creada!</h1>
+          <p class="auth__success" role="status">
+            Si tu proyecto requiere confirmación por email, revisa tu bandeja de entrada antes de
+            iniciar sesión.
+          </p>
+          <ion-button class="auth__submit" expand="block" routerLink="/login">
+            Ir a iniciar sesión
+          </ion-button>
+        } @else {
+          <h1 class="auth__title">Crea tu cuenta</h1>
+          <p class="auth__subtitle">Solo te llevará un momento.</p>
+
+          <form
+            class="auth__form"
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            novalidate
+            aria-label="Formulario de registro"
+          >
+            <div class="auth__field">
+              <ion-input
+                label="Nombre completo"
+                labelPlacement="floating"
+                fill="outline"
+                formControlName="nombre"
+                autocomplete="name"
+                required
+                aria-required="true"
+              ></ion-input>
+            </div>
+            @if (form.controls.nombre.invalid && form.controls.nombre.touched) {
+              <p class="auth__error" role="alert">Introduce tu nombre (mínimo 2 caracteres).</p>
+            }
+
+            <div class="auth__field">
+              <ion-input
+                label="Email"
+                labelPlacement="floating"
+                fill="outline"
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                inputmode="email"
+                required
+                aria-required="true"
+              ></ion-input>
+              @if (form.controls.email.pending) {
+                <ion-spinner
+                  class="auth__spinner"
+                  name="dots"
+                  aria-label="Comprobando disponibilidad del email"
+                ></ion-spinner>
+              }
+            </div>
+            @if (form.controls.email.hasError('email') && form.controls.email.touched) {
+              <p class="auth__error" role="alert">Introduce un email válido.</p>
+            }
+            @if (form.controls.email.hasError('emailExists') && !form.controls.email.pending) {
+              <p class="auth__error" role="alert">Ese email ya está registrado. Prueba a iniciar sesión.</p>
+            }
+
+            <div class="auth__field">
+              <ion-input
+                label="Contraseña"
+                labelPlacement="floating"
+                fill="outline"
+                type="password"
+                formControlName="password"
+                autocomplete="new-password"
+                required
+                aria-required="true"
+              >
+                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+              </ion-input>
+            </div>
+            @if (form.controls.password.invalid && form.controls.password.touched) {
+              <p class="auth__error" role="alert">Mínimo 6 caracteres.</p>
+            }
+
+            <div class="auth__field">
+              <ion-input
+                label="Confirmar contraseña"
+                labelPlacement="floating"
+                fill="outline"
+                type="password"
+                formControlName="confirmPassword"
+                autocomplete="new-password"
+                required
+                aria-required="true"
+              ></ion-input>
+            </div>
+            @if (form.hasError('passwordsMismatch') && form.controls.confirmPassword.touched) {
+              <p class="auth__error" role="alert">Las contraseñas no coinciden.</p>
+            }
+
+            @if (errorMessage()) {
+              <p class="auth__alert" role="alert">{{ errorMessage() }}</p>
+            }
+
+            <ion-button class="auth__submit" expand="block" type="submit" [disabled]="submitting()">
+              {{ submitting() ? 'Creando cuenta…' : 'Crear cuenta' }}
+            </ion-button>
+          </form>
+
+          <p class="auth__switch">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
         }
-      </ion-item>
-      @if (form.controls.email.hasError('email') && form.controls.email.touched) {
-        <ion-text color="danger" role="alert">
-          <p>Introduce un email válido.</p>
-        </ion-text>
-      }
-      @if (form.controls.email.hasError('emailExists') && !form.controls.email.pending) {
-        <ion-text color="danger" role="alert">
-          <p>Ese email ya está registrado. Prueba a iniciar sesión.</p>
-        </ion-text>
-      }
-
-      <ion-item>
-        <ion-input label="Contraseña" labelPlacement="stacked"
-          type="password"
-          formControlName="password"
-          autocomplete="new-password"
-          required
-          aria-required="true"
-        ></ion-input>
-      </ion-item>
-      @if (form.controls.password.invalid && form.controls.password.touched) {
-        <ion-text color="danger" role="alert">
-          <p>Mínimo 6 caracteres.</p>
-        </ion-text>
-      }
-
-      <ion-item>
-        <ion-input label="Confirmar contraseña" labelPlacement="stacked"
-          type="password"
-          formControlName="confirmPassword"
-          autocomplete="new-password"
-          required
-          aria-required="true"
-        ></ion-input>
-      </ion-item>
-      @if (form.hasError('passwordsMismatch') && form.controls.confirmPassword.touched) {
-        <ion-text color="danger" role="alert">
-          <p>Las contraseñas no coinciden.</p>
-        </ion-text>
-      }
-
-      @if (errorMessage()) {
-        <ion-text color="danger" role="alert">
-          <p>{{ errorMessage() }}</p>
-        </ion-text>
-      }
-
-      <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="submitting()">
-        {{ submitting() ? 'Creando cuenta…' : 'Crear cuenta' }}
-      </ion-button>
-    </form>
-
-    <p class="ion-text-center ion-margin-top">
-      ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
-    </p>
-  }
+      </div>
+    </section>
+  </div>
 </ion-content>

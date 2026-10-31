@@ -57,7 +57,12 @@ export class AuthService {
 
   /** Inicia sesión con email y contraseña; devuelve el mensaje de error de Supabase o `null`. */
   public async login(email: string, password: string): Promise<{ error: string | null }> {
-    const { error } = await this.supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await this.supabase.auth.signInWithPassword({ email, password });
+    if (!error && data.session) {
+      // Se espera al perfil (rol) antes de navegar: si no, los guards RBAC verían rol vacío
+      // y mandarían a un administrador a /forbidden al entrar en una ruta protegida.
+      await this.applySession(data.session);
+    }
     return { error: error?.message ?? null };
   }
 

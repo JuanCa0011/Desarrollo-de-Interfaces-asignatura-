@@ -14,6 +14,9 @@ import { ThemeService } from '../../../core/services/theme.service';
 
 Chart.register(...registerables);
 
+/** Paleta de series: acento índigo + tonos con buen contraste en claro y oscuro (el gris se reserva a "Otros"). */
+const PALETTE = ['#6366f1', '#14b8a6', '#f59e0b', '#ec4899', '#8b5cf6', '#94a3b8'];
+
 /**
  * Gráfico Chart.js reutilizable y agnóstico: recibe tipo, etiquetas y serie por `input()`.
  * Se actualiza al cambiar los datos y libera el canvas en `ngOnDestroy` (sin memory leaks).
@@ -36,17 +39,28 @@ Chart.register(...registerables);
       display: block;
     }
     .chart-card {
+      display: flex;
+      flex-direction: column;
       margin: 0;
-      padding: 16px;
-      border-radius: 8px;
+      padding: 20px;
+      height: 100%;
+      border: 1px solid var(--app-border);
+      border-radius: var(--app-radius);
       background: var(--app-surface);
+      box-shadow: var(--app-shadow);
     }
     .chart-card__title {
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      font-family: var(--app-font-display);
+      font-size: 1.1rem;
       font-weight: 700;
     }
     .chart-card__empty {
-      margin: 24px 0;
+      display: grid;
+      flex: 1;
+      place-items: center;
+      min-height: 160px;
+      margin: 0;
       text-align: center;
       color: var(--app-text-muted);
     }
@@ -105,20 +119,22 @@ export class ChartCardComponent implements OnDestroy {
               label,
               data,
               backgroundColor: circular
-                ? labels.map((_, i) => `hsl(${(i * 47) % 360} 65% 50%)`)
-                : '#3880ff',
-              borderColor: circular ? getComputedStyle(document.body).backgroundColor : '#3880ff',
+                ? labels.map((l, i) => (l === 'Otros' ? PALETTE[5] : PALETTE[i % 5]))
+                : '#6366f1',
+              borderColor: circular ? getComputedStyle(document.documentElement).getPropertyValue('--app-surface').trim() : '#6366f1',
+              borderWidth: circular ? 3 : 2,
             },
           ],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          ...(type === 'doughnut' ? { cutout: '64%' } : {}),
           plugins: {
             legend: {
               display: circular,
               position: 'bottom',
-              labels: { color: getComputedStyle(document.body).color },
+              labels: { color: getComputedStyle(document.body).color, usePointStyle: true, padding: 14 },
             },
           },
         },

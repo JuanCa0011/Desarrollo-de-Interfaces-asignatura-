@@ -1,24 +1,19 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { libraryOutline, gridOutline, logOutOutline } from 'ionicons/icons';
+import { bookOutline, libraryOutline, gridOutline, logOutOutline } from 'ionicons/icons';
 import {
   IonSplitPane,
   IonMenu,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
-  IonList,
-  IonItem,
   IonIcon,
-  IonLabel,
   IonMenuToggle,
   IonRouterOutlet,
 } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 
 addIcons({
+  'book-outline': bookOutline,
   'library-outline': libraryOutline,
   'grid-outline': gridOutline,
   'log-out-outline': logOutOutline,
@@ -40,14 +35,8 @@ addIcons({
     RouterLinkActive,
     IonSplitPane,
     IonMenu,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
-    IonList,
-    IonItem,
     IonIcon,
-    IonLabel,
     IonMenuToggle,
     IonRouterOutlet,
   ],
@@ -57,6 +46,16 @@ export class MainLayoutPage {
   protected readonly authService = inject(AuthService);
   /** Router para redirigir al login tras cerrar sesión. */
   private readonly router = inject(Router);
+
+  /** Inicial del nombre del usuario para el avatar. */
+  protected readonly initial = computed(
+    () => (this.authService.profile()?.nombre ?? 'U').trim().charAt(0) || 'U',
+  );
+
+  /** Nombre del usuario dividido antes de la `@`, para que un email largo salte de línea de forma limpia. */
+  protected readonly nameParts = computed(() =>
+    (this.authService.profile()?.nombre ?? 'Usuario').split(/(?=@)/),
+  );
 
   /** Cierra la sesión en Supabase y navega a `/login`. */
   public async logout(): Promise<void> {

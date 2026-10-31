@@ -89,12 +89,14 @@ export class AdminDashboardPage implements OnInit {
 
   /** Stock agrupado por categoría. */
   protected readonly stockPorCategoria = computed(() =>
-    this.group(this.libros(), (l) => l.categoria, (l) => l.stock),
+    this.topWithOthers(this.group(this.libros(), (l) => l.categoria, (l) => l.stock)),
   );
 
   /** Ingresos de ventas agrupados por categoría del libro vendido. */
   protected readonly ingresosPorCategoria = computed(() =>
-    this.group(this.ventas(), (v) => v.libros?.categoria ?? 'Sin categoría', (v) => v.total),
+    this.topWithOthers(
+      this.group(this.ventas(), (v) => v.libros?.categoria ?? 'Sin categoría', (v) => v.total),
+    ),
   );
 
   /** Carga datos y arranca el flujo de reseñas simuladas. */
@@ -151,6 +153,20 @@ export class AdminDashboardPage implements OnInit {
     format === 'csv'
       ? this.exportService.exportCsv('ventas', table)
       : this.exportService.exportPdf('ventas', table);
+  }
+
+  /** Deja las `n` series mayores y agrupa el resto en «Otros» (los circulares legibles tienen pocas porciones). */
+  private topWithOthers(
+    g: { labels: string[]; data: number[] },
+    n = 5,
+  ): { labels: string[]; data: number[] } {
+    const sorted = g.labels
+      .map((label, i) => ({ label, value: g.data[i] }))
+      .sort((a, b) => b.value - a.value);
+    const top = sorted.slice(0, n);
+    const rest = sorted.slice(n).reduce((sum, x) => sum + x.value, 0);
+    if (rest > 0) top.push({ label: 'Otros', value: rest });
+    return { labels: top.map((x) => x.label), data: top.map((x) => x.value) };
   }
 
   /** Agrupa elementos por clave sumando un valor y devuelve etiquetas y datos ordenados. */
