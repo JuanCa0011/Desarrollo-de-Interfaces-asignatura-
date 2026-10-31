@@ -112,7 +112,16 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
     modelos, páginas y componentes compartidos).
   - **Manual de usuario** ✅: [`docs/manual/MANUAL_USUARIO.md`](docs/manual/MANUAL_USUARIO.md), con capturas
     en `docs/manual/img/` y credenciales de prueba.
-  - Pendiente: Git flow (`develop`) y despliegue en Vercel.
+  - **Git flow** ✅: `develop` recibe `feature/actividad1-setup` con merge `--no-ff`; ramas subidas a GitHub.
+    Trabajar en `develop`/`feature/*`: en `main` los `environment*.ts` antiguos siguen versionados y
+    cambiar a esa rama sobrescribe los locales (hay que regenerarlos con `scripts/set-env.mjs`).
+  - **Vercel** (configuración lista, falta conectar el repo en vercel.com):
+    - `vercel.json`: `npm ci`, `npm run build:vercel`, salida `www`, reescritura de rutas a `index.html` (SPA).
+    - `scripts/set-env.mjs` genera `environment.ts`/`environment.prod.ts` desde `SUPABASE_URL` y `SUPABASE_KEY`.
+    - Pasos: Import Project → repo `Desarrollo-de-Interfaces-asignatura-` → *Root Directory*
+      `20261027_actividad_individual_1` → rama a desplegar → *Environment Variables*
+      `SUPABASE_URL` y `SUPABASE_KEY` → Deploy.
+    - En Supabase: *Authentication → URL Configuration* → añadir la URL de Vercel en *Site URL*/*Redirect URLs*.
 
 ## 6. Checklist de entregables finales
 
