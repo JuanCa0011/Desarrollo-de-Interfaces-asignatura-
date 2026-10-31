@@ -1,0 +1,17 @@
+<button
+  type="button"
+  class="stat-widget"
+  [class]="'stat-widget stat-widget--' + color()"
+  (click)="selected.emit()"
+>
+  @if (icon(); as iconName) {
+    <ion-icon class="stat-widget__icon" [name]="iconName" aria-hidden="true"></ion-icon>
+  }
+  <span class="stat-widget__body">
+    <span class="stat-widget__label">{{ label() }}</span>
+    <span class="stat-widget__value">{{ value() }}</span>
+    @if (hint()) {
+      <span class="stat-widget__hint">{{ hint() }}</span>
+    }
+  </span>
+</button>

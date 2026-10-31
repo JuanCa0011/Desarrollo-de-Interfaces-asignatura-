@@ -1,0 +1,68 @@
+<ion-searchbar
+  class="book-table__search"
+  placeholder="Buscar por título, autor, categoría o ISBN"
+  aria-label="Buscar libros"
+  [debounce]="250"
+  (ionInput)="onSearch($event)"
+></ion-searchbar>
+
+@if (loading()) {
+  <div class="book-table__state">
+    <ion-spinner name="dots" aria-label="Cargando libros"></ion-spinner>
+  </div>
+} @else {
+  <div class="book-table__scroll">
+    <table class="book-table__table">
+      <caption class="book-table__caption">
+        {{ caption() }} ({{ rows().length }} {{ rows().length === 1 ? 'resultado' : 'resultados' }})
+      </caption>
+      <thead>
+        <tr>
+          @for (col of columns; track col.key) {
+            <th
+              scope="col"
+              class="book-table__th"
+              [class.book-table__th--numeric]="col.numeric"
+              [attr.aria-sort]="ariaSort(col.key)"
+            >
+              <button type="button" class="book-table__sort" (click)="sortBy(col.key)">
+                {{ col.label }}
+                @if (sortKey() === col.key) {
+                  <span aria-hidden="true">{{ sortDir() === 'asc' ? '▲' : '▼' }}</span>
+                }
+              </button>
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (libro of rows(); track libro.id) {
+          <tr
+            class="book-table__row"
+            tabindex="0"
+            (click)="rowSelected.emit(libro)"
+            (keydown.enter)="rowSelected.emit(libro)"
+            (keydown.space)="rowSelected.emit(libro); $event.preventDefault()"
+          >
+            <th scope="row" class="book-table__title">{{ libro.titulo }}</th>
+            <td>{{ libro.autor }}</td>
+            <td>{{ libro.categoria }}</td>
+            <td class="book-table__cell--numeric">{{ libro.precio | currency: 'EUR' }}</td>
+            <td
+              class="book-table__cell--numeric"
+              [class.book-table__cell--low]="libro.stock <= 5"
+            >
+              {{ libro.stock }}
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="book-table__empty">
+              <ion-text color="medium">No hay libros que coincidan con la búsqueda.</ion-text>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
