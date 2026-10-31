@@ -584,17 +584,19 @@ export class BookCardComponent {
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;book-card&quot; (click)&#x3D;&quot;selected.emit(libro())&quot;&gt;
   &lt;span class&#x3D;&quot;book-card__cover&quot;&gt;
-    &lt;app-book-cover [titulo]&#x3D;&quot;libro().titulo&quot; [autor]&#x3D;&quot;libro().autor&quot; /&gt;
+    &lt;app-book-cover [titulo]&#x3D;&quot;libro().titulo&quot; [autor]&#x3D;&quot;libro().autor&quot; [isbn]&#x3D;&quot;libro().isbn&quot; /&gt;
     @if (descuento() &gt; 0) {
       &lt;span class&#x3D;&quot;book-card__badge book-card__badge--discount&quot;&gt;-{{ descuento() }}%&lt;/span&gt;
-    }
-    @if (libro().destacado) {
-      &lt;span class&#x3D;&quot;book-card__badge book-card__badge--featured&quot;&gt;Destacado&lt;/span&gt;
     }
   &lt;/span&gt;
 
   &lt;span class&#x3D;&quot;book-card__body&quot;&gt;
-    &lt;span class&#x3D;&quot;book-card__category&quot;&gt;{{ libro().categoria }}&lt;/span&gt;
+    &lt;span class&#x3D;&quot;book-card__category&quot;&gt;
+      {{ libro().categoria }}
+      @if (libro().destacado) {
+        &lt;span class&#x3D;&quot;book-card__featured&quot;&gt;★ Destacado&lt;/span&gt;
+      }
+    &lt;/span&gt;
     &lt;span class&#x3D;&quot;book-card__title&quot;&gt;{{ libro().titulo }}&lt;/span&gt;
     &lt;span class&#x3D;&quot;book-card__author&quot;&gt;{{ libro().autor }}&lt;/span&gt;
 
@@ -675,12 +677,6 @@ export class BookCardComponent {
       background: #b91c1c;
       color: #fff;
     }
-
-    &amp;--featured {
-      left: 8px;
-      background: #fef3c7;
-      color: #78350f;
-    }
   }
 
   &amp;__body {
@@ -709,6 +705,18 @@ export class BookCardComponent {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ion-color-primary);
+  }
+
+  &amp;__featured {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: #78350f;
+    background: #fef3c7;
   }
 
   &amp;__title {
@@ -800,7 +808,7 @@ export class BookCardComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><button type="button" class="book-card" (click)="selected.emit(libro())">  <span class="book-card__cover">    <app-book-cover [titulo]="libro().titulo" [autor]="libro().autor" />    @if (descuento() > 0) {      <span class="book-card__badge book-card__badge--discount">-{{ descuento() }}%</span>    }    @if (libro().destacado) {      <span class="book-card__badge book-card__badge--featured">Destacado</span>    }  </span>  <span class="book-card__body">    <span class="book-card__category">{{ libro().categoria }}</span>    <span class="book-card__title">{{ libro().titulo }}</span>    <span class="book-card__author">{{ libro().autor }}</span>    <span class="book-card__meta">      @if (libro().valoracion; as v) {        <span class="book-card__rating">          <span class="sr-only">Valoración {{ v }} de 5</span>          <span aria-hidden="true">★ {{ v }}</span>        </span>      }      <span class="book-card__stock book-card__stock--{{ stock().kind }}">{{ stock().text }}</span>    </span>    <span class="book-card__price">      <span class="book-card__price-now">{{ precioFinal() | currency: \'EUR\' }}</span>      @if (descuento() > 0) {        <s class="book-card__price-old">{{ libro().precio | currency: \'EUR\' }}</s>      }    </span>  </span></button></div>'
+        var COMPONENT_TEMPLATE = '<div><button type="button" class="book-card" (click)="selected.emit(libro())">  <span class="book-card__cover">    <app-book-cover [titulo]="libro().titulo" [autor]="libro().autor" [isbn]="libro().isbn" />    @if (descuento() > 0) {      <span class="book-card__badge book-card__badge--discount">-{{ descuento() }}%</span>    }  </span>  <span class="book-card__body">    <span class="book-card__category">      {{ libro().categoria }}      @if (libro().destacado) {        <span class="book-card__featured">★ Destacado</span>      }    </span>    <span class="book-card__title">{{ libro().titulo }}</span>    <span class="book-card__author">{{ libro().autor }}</span>    <span class="book-card__meta">      @if (libro().valoracion; as v) {        <span class="book-card__rating">          <span class="sr-only">Valoración {{ v }} de 5</span>          <span aria-hidden="true">★ {{ v }}</span>        </span>      }      <span class="book-card__stock book-card__stock--{{ stock().kind }}">{{ stock().text }}</span>    </span>    <span class="book-card__price">      <span class="book-card__price-now">{{ precioFinal() | currency: \'EUR\' }}</span>      @if (descuento() > 0) {        <s class="book-card__price-old">{{ libro().precio | currency: \'EUR\' }}</s>      }    </span>  </span></button></div>'
     var COMPONENTS = [{'name': 'AdminDashboardPage', 'selector': 'app-admin-dashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BookCardComponent', 'selector': 'app-book-card'},{'name': 'BookCoverComponent', 'selector': 'app-book-cover'},{'name': 'BookDataTableComponent', 'selector': 'app-book-data-table'},{'name': 'ChartCardComponent', 'selector': 'app-chart-card'},{'name': 'ForbiddenPage', 'selector': 'app-forbidden'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MainLayoutPage', 'selector': 'app-main-layout'},{'name': 'NotFoundPage', 'selector': 'app-not-found'},{'name': 'RegisterPage', 'selector': 'app-register'},{'name': 'StatWidgetComponent', 'selector': 'app-stat-widget'},{'name': 'ThemeToggleComponent', 'selector': 'app-theme-toggle'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'BookCardComponent'};
