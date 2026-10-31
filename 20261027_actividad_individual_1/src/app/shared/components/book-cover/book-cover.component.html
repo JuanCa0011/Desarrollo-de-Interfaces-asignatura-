@@ -1,0 +1,24 @@
+<div class="frame">
+  <div class="cover" [style.--cover-from]="from()" [style.--cover-to]="to()" aria-hidden="true">
+    <span class="cover__title">{{ titulo() }}</span>
+    <span class="cover__rule"></span>
+    <span class="cover__author">{{ autor() }}</span>
+  </div>
+
+  @if (photoUrl(); as url) {
+    <!-- Decorativa: el título y el autor ya figuran como texto junto a la portada. -->
+    <img
+      class="photo"
+      [class.photo--loaded]="loaded()"
+      [src]="url"
+      alt=""
+      width="200"
+      height="300"
+      loading="lazy"
+      decoding="async"
+      referrerpolicy="no-referrer"
+      (load)="loaded.set(true)"
+      (error)="failed.set(true)"
+    />
+  }
+</div>

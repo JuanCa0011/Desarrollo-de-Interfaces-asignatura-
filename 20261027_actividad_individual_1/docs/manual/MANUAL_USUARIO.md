@@ -71,8 +71,8 @@ si quieres descartar lo escrito.
 
 Al iniciar sesión llegas al **Catálogo**, un escaparate con todos los libros. Cada tarjeta muestra:
 
-- la **portada**, con etiquetas de *Destacado* y de descuento (por ejemplo, **-10 %**);
-- la **categoría**, el **título** y el **autor**;
+- la **portada** del libro: la foto real cuando está disponible y, si no la hay, una portada con el título y el autor. Si hay descuento, aparece una etiqueta (por ejemplo, **-10 %**);
+- la **categoría** (con la etiqueta *★ Destacado* si lo es), el **título** y el **autor**;
 - la **valoración** (★) y la **disponibilidad**: *En stock*, *Últimas N uds.* (5 o menos) o *Agotado*;
 - el **precio final**, con el precio original tachado cuando hay descuento.
 

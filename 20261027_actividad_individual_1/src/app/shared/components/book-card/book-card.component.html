@@ -1,16 +1,18 @@
 <button type="button" class="book-card" (click)="selected.emit(libro())">
   <span class="book-card__cover">
-    <app-book-cover [titulo]="libro().titulo" [autor]="libro().autor" />
+    <app-book-cover [titulo]="libro().titulo" [autor]="libro().autor" [isbn]="libro().isbn" />
     @if (descuento() > 0) {
       <span class="book-card__badge book-card__badge--discount">-{{ descuento() }}%</span>
-    }
-    @if (libro().destacado) {
-      <span class="book-card__badge book-card__badge--featured">Destacado</span>
     }
   </span>
 
   <span class="book-card__body">
-    <span class="book-card__category">{{ libro().categoria }}</span>
+    <span class="book-card__category">
+      {{ libro().categoria }}
+      @if (libro().destacado) {
+        <span class="book-card__featured">★ Destacado</span>
+      }
+    </span>
     <span class="book-card__title">{{ libro().titulo }}</span>
     <span class="book-card__author">{{ libro().autor }}</span>
 

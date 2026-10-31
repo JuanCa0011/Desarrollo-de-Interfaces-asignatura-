@@ -113,6 +113,9 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
   - Login/registro en diseño partido; menú lateral con marca y tarjeta de usuario.
   - Dashboard bento: KPI planos, circulares con top 5 + «Otros», reseñas en directo y tabla en panel.
   - Lighthouse tras el rediseño (claro y oscuro): Accesibilidad 100 / Buenas prácticas 100.
+  - Portadas reales: `BookCoverComponent` carga la foto de Open Library por ISBN (`covers.openlibrary.org`, sin clave)
+    y mantiene como respaldo la portada generada con CSS (14 de 17 libros tienen foto; faltan *El nombre de la rosa*,
+    *Fútbol a sol y sombra* y *Veinte poemas de amor…*). No se modifica `portada_url` de la base de datos.
   - Correcciones de comportamiento detectadas al verificar el manual en la app real: el login conserva
     `returnUrl` también en rutas de rol (`roleMatchGuard`/`roleActivateGuard`), y `AuthService.login()` espera
     a cargar el perfil antes de navegar (antes un admin que entraba a `/admin` acababa en `/forbidden`).
