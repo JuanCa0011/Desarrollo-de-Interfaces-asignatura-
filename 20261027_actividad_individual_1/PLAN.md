@@ -122,7 +122,7 @@ Paso 1.2 de la actividad). Ya ejecutada en Supabase.
   - Manual de usuario reescrito con 12 capturas del diseño actual (`docs/manual/img/`) y afirmaciones
     verificadas con navegador automatizado (login con returnUrl, exportaciones, RBAC, filtros, tema).
 - **Fase 5:** Git flow, Compodoc, manual de usuario, despliegue en Vercel.
-  - **Compodoc** ✅: `npm run docs` genera `documentation/` (versionada en Git como entregable; regenerar con el mismo comando tras cambios) y `npm run docs:serve` la sirve
+  - **Compodoc** ✅: `npm run docs` genera `documentation/` (no se versiona; se regenera con el mismo comando) y `npm run docs:serve` la sirve
     en local. Usa `tsconfig.doc.json`. Cobertura de documentación: 98 % (JSDoc en servicios, guards,
     modelos, páginas y componentes compartidos).
   - **Manual de usuario** ✅: [`docs/manual/MANUAL_USUARIO.md`](docs/manual/MANUAL_USUARIO.md), con capturas
