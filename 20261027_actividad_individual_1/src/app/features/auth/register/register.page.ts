@@ -24,12 +24,14 @@ import { ComponentCanDeactivate } from '../../../core/guards/pending-changes.gua
 import { emailExistsValidator } from '../../../core/validators/email-exists.validator';
 import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/theme-toggle.component';
 
+/** Validador de grupo: error `passwordsMismatch` si las contraseñas no coinciden. */
 function passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
   const password = group.get('password')?.value;
   const confirmPassword = group.get('confirmPassword')?.value;
   return password === confirmPassword ? null : { passwordsMismatch: true };
 }
 
+/** Página de registro con validación asíncrona de email duplicado y protección de cambios sin guardar. */
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -51,14 +53,21 @@ function passwordsMatchValidator(group: AbstractControl): ValidationErrors | nul
   ],
 })
 export class RegisterPage implements ComponentCanDeactivate {
+  /** Constructor de formularios reactivos. */
   private readonly fb = inject(FormBuilder);
+  /** Servicio de autenticación. */
   private readonly authService = inject(AuthService);
+  /** Router para redirigir tras el registro. */
   private readonly router = inject(Router);
 
+  /** Indica que hay un envío en curso. */
   public readonly submitting = signal(false);
+  /** Mensaje de error a mostrar, o `null`. */
   public readonly errorMessage = signal<string | null>(null);
+  /** `true` cuando la cuenta se creó correctamente. */
   public readonly registered = signal(false);
 
+  /** Formulario con nombre, email (async, al perder el foco) y contraseñas. */
   public readonly form = this.fb.nonNullable.group(
     {
       nombre: ['', [Validators.required, Validators.minLength(2)]],
@@ -76,6 +85,7 @@ export class RegisterPage implements ComponentCanDeactivate {
     { validators: passwordsMatchValidator },
   );
 
+  /** Valida, registra al usuario y, si queda con sesión, navega al catálogo. */
   public async onSubmit(): Promise<void> {
     if (this.form.invalid || this.submitting()) {
       this.form.markAllAsTouched();

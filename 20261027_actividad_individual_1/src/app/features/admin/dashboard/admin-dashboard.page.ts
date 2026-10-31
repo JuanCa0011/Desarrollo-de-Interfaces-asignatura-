@@ -48,22 +48,37 @@ import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/th
   ],
 })
 export class AdminDashboardPage implements OnInit {
+  /** Servicio de libros (SQL). */
   private readonly librosService = inject(LibrosService);
+  /** Servicio de ventas (SQL). */
   private readonly ventasService = inject(VentasService);
+  /** Servicio de reseñas (NoSQL simulado). */
   private readonly resenasService = inject(ResenasMockService);
+  /** Servicio de exportación PDF/CSV. */
   private readonly exportService = inject(ExportService);
+  /** Pipe de moneda reutilizado desde la clase. */
   private readonly currency = inject(CurrencyPipe);
+  /** Referencia de destrucción para cancelar suscripciones. */
   private readonly destroyRef = inject(DestroyRef);
 
+  /** Inventario cargado. */
   public readonly libros = signal<Libro[]>([]);
+  /** Ventas cargadas (puede estar vacío). */
   public readonly ventas = signal<VentaConLibro[]>([]);
+  /** Últimas reseñas recibidas en tiempo real. */
   public readonly resenas = signal<Resena[]>([]);
+  /** Indica que la carga inicial está en curso. */
   public readonly loading = signal(true);
+  /** Mensaje de error de carga, o `null`. */
   public readonly errorMessage = signal<string | null>(null);
 
+  /** Número de títulos distintos. */
   public readonly totalTitulos = computed(() => this.libros().length);
+  /** Unidades totales en stock. */
   public readonly totalStock = computed(() => this.libros().reduce((s, l) => s + l.stock, 0));
+  /** Títulos con 5 unidades o menos. */
   public readonly bajoStock = computed(() => this.libros().filter((l) => l.stock <= 5).length);
+  /** Valor del inventario (precio por stock) formateado en euros. */
   public readonly valorInventario = computed(
     () =>
       this.currency.transform(
@@ -82,6 +97,7 @@ export class AdminDashboardPage implements OnInit {
     this.group(this.ventas(), (v) => v.libros?.categoria ?? 'Sin categoría', (v) => v.total),
   );
 
+  /** Carga datos y arranca el flujo de reseñas simuladas. */
   public async ngOnInit(): Promise<void> {
     this.resenasService
       .stream()
@@ -107,6 +123,7 @@ export class AdminDashboardPage implements OnInit {
     }
   }
 
+  /** Exporta el inventario en el formato indicado. */
   public exportInventario(format: 'csv' | 'pdf'): void {
     const table = {
       title: 'Informe de inventario',
@@ -118,6 +135,7 @@ export class AdminDashboardPage implements OnInit {
       : this.exportService.exportPdf('inventario', table);
   }
 
+  /** Exporta las ventas en el formato indicado. */
   public exportVentas(format: 'csv' | 'pdf'): void {
     const table = {
       title: 'Informe de ventas',
@@ -135,6 +153,7 @@ export class AdminDashboardPage implements OnInit {
       : this.exportService.exportPdf('ventas', table);
   }
 
+  /** Agrupa elementos por clave sumando un valor y devuelve etiquetas y datos ordenados. */
   private group<T>(
     items: T[],
     keyFn: (i: T) => string,

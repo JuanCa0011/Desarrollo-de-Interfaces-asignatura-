@@ -30,5 +30,6 @@ addIcons({ 'moon-outline': moonOutline, 'sunny-outline': sunnyOutline });
   imports: [IonButton, IonIcon],
 })
 export class ThemeToggleComponent {
+  /** Servicio que gestiona el tema. */
   protected readonly theme = inject(ThemeService);
 }

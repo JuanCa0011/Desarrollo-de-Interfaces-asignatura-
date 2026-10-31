@@ -58,19 +58,30 @@ Chart.register(...registerables);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartCardComponent implements OnDestroy {
+  /** Título del gráfico (también su etiqueta accesible). */
   public readonly title = input.required<string>();
+  /** Tipo de gráfico de Chart.js (`bar`, `line`, `pie`, `doughnut`...). */
   public readonly type = input<ChartType>('bar');
+  /** Etiquetas de cada dato. */
   public readonly labels = input<string[]>([]);
+  /** Valores numéricos de la serie. */
   public readonly data = input<number[]>([]);
+  /** Nombre de la serie. */
   public readonly seriesLabel = input('Valor');
+  /** Texto mostrado cuando no hay datos. */
   public readonly emptyMessage = input('No hay datos para mostrar.');
 
+  /** `true` si hay algún valor mayor que cero. */
   protected readonly hasData = computed(() => this.data().some((v) => v > 0));
 
+  /** Referencia al `<canvas>` donde se dibuja. */
   private readonly canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
+  /** Servicio de tema; redibuja al cambiar de modo. */
   private readonly theme = inject(ThemeService);
+  /** Instancia de Chart.js activa. */
   private chart?: Chart;
 
+  /** Crea o redibuja el gráfico cuando cambian los datos o el tema. */
   constructor() {
     effect(() => {
       const type = this.type();
@@ -115,12 +126,14 @@ export class ChartCardComponent implements OnDestroy {
     });
   }
 
+  /** Resumen textual del gráfico para lectores de pantalla. */
   protected summary(): string {
     return this.labels()
       .map((l, i) => `${l} ${this.data()[i]}`)
       .join(', ');
   }
 
+  /** Destruye el gráfico para liberar el canvas. */
   public ngOnDestroy(): void {
     this.chart?.destroy();
   }

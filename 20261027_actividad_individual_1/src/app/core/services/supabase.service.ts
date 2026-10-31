@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
  */
 @Injectable({ providedIn: 'root' })
 export class SupabaseService {
+  /** Cliente de Supabase configurado con la URL y clave del entorno. */
   public readonly client: SupabaseClient = createClient(
     environment.supabaseUrl,
     environment.supabaseKey,

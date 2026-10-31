@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, defer, delay, map, merge, of, startWith, timer } from 'rxjs';
 import { Resena } from '../models/database.models';
 
+/** Nombres ficticios usados al generar reseñas. */
 const AUTORES = ['Lucía M.', 'Carlos R.', 'Elena P.', 'Miguel A.', 'Sofía G.', 'Andrés T.'];
+/** Comentarios de ejemplo para las reseñas simuladas. */
 const COMENTARIOS = [
   'Muy recomendable, no pude dejarlo.',
   'Buena historia, aunque el final es flojo.',
@@ -19,8 +21,11 @@ const COMENTARIOS = [
  */
 @Injectable({ providedIn: 'root' })
 export class ResenasMockService {
+  /** Colección en memoria (equivale a una colección de documentos). */
   private readonly store: Resena[] = [];
+  /** Notifica cada reseña nueva a los suscriptores de `stream()`. */
   private readonly added$ = new Subject<Resena>();
+  /** Contador para generar identificadores. */
   private seq = 0;
 
   /** Consulta puntual con latencia simulada (equivalente a `getDocs`). */
@@ -36,6 +41,7 @@ export class ResenasMockService {
     );
   }
 
+  /** Inserta una reseña, la notifica en tiempo real y la devuelve. */
   public add(libroId: string, libroTitulo: string, puntuacion: number, comentario: string): Resena {
     const resena: Resena = {
       id: `r${++this.seq}`,

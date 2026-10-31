@@ -5,8 +5,10 @@ import { VentaConLibro } from '../models/database.models';
 /** Acceso a la tabla `ventas` en Supabase (fuente SQL/relacional) con el libro asociado. */
 @Injectable({ providedIn: 'root' })
 export class VentasService {
+  /** Cliente de Supabase compartido. */
   private readonly supabase = inject(SupabaseService).client;
 
+  /** Devuelve todas las ventas con el título y categoría del libro, ordenadas por fecha. */
   public async listAll(): Promise<VentaConLibro[]> {
     const { data, error } = await this.supabase
       .from('ventas')

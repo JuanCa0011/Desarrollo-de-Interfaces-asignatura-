@@ -33,13 +33,19 @@ import { ThemeToggleComponent } from '../shared/components/theme-toggle/theme-to
   ],
 })
 export class HomePage implements OnInit {
+  /** Servicio de acceso a los libros. */
   private readonly librosService = inject(LibrosService);
 
+  /** Libros cargados desde Supabase. */
   public readonly libros = signal<Libro[]>([]);
+  /** Indica que la carga inicial está en curso. */
   public readonly loading = signal(true);
+  /** Mensaje de error de carga, o `null`. */
   public readonly errorMessage = signal<string | null>(null);
+  /** Último libro seleccionado en la tabla. */
   public readonly selected = signal<Libro | null>(null);
 
+  /** Carga el catálogo al iniciar la página. */
   public async ngOnInit(): Promise<void> {
     try {
       this.libros.set(await this.librosService.listAll());
@@ -50,6 +56,7 @@ export class HomePage implements OnInit {
     }
   }
 
+  /** Guarda el libro seleccionado en la tabla. */
   public onRowSelected(libro: Libro): void {
     this.selected.set(libro);
   }

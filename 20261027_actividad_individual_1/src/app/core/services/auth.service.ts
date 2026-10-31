@@ -14,25 +14,38 @@ import { Profile, UserRole } from '../models/database.models';
  */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  /** Cliente de Supabase compartido. */
   private readonly supabase = inject(SupabaseService).client;
 
+  /** Sesión de Supabase Auth (null si no hay usuario). */
   private readonly _session = signal<Session | null>(null);
+  /** Fila de `profiles` del usuario actual. */
   private readonly _profile = signal<Profile | null>(null);
+  /** Indica que ya se restauró la sesión inicial. */
   private readonly _ready = signal(false);
 
+  /** Sesión actual, solo lectura. */
   public readonly session = this._session.asReadonly();
+  /** Perfil actual (incluye el rol), solo lectura. */
   public readonly profile = this._profile.asReadonly();
+  /** Señal `true` cuando la restauración inicial de sesión terminó. */
   public readonly ready = this._ready.asReadonly();
 
+  /** `true` si hay sesión activa. */
   public readonly isAuthenticated = computed(() => this._session() !== null);
+  /** Rol del usuario actual o `null`. */
   public readonly role = computed<UserRole | null>(() => this._profile()?.role ?? null);
+  /** `true` si el usuario es administrador. */
   public readonly isAdmin = computed(() => this.role() === 'admin');
 
+  /** Resuelve `readyPromise` al terminar `initialize()`. */
   private resolveReady!: () => void;
+  /** Promesa que esperan los guards antes de decidir. */
   private readonly readyPromise = new Promise<void>((resolve) => {
     this.resolveReady = resolve;
   });
 
+  /** Arranca la restauración de sesión. */
   constructor() {
     void this.initialize();
   }
@@ -42,11 +55,13 @@ export class AuthService {
     return this._ready() ? Promise.resolve() : this.readyPromise;
   }
 
+  /** Inicia sesión con email y contraseña; devuelve el mensaje de error de Supabase o `null`. */
   public async login(email: string, password: string): Promise<{ error: string | null }> {
     const { error } = await this.supabase.auth.signInWithPassword({ email, password });
     return { error: error?.message ?? null };
   }
 
+  /** Crea una cuenta nueva (el nombre viaja en los metadatos) y devuelve el error o `null`. */
   public async register(
     email: string,
     password: string,
@@ -60,6 +75,7 @@ export class AuthService {
     return { error: error?.message ?? null };
   }
 
+  /** Cierra la sesión actual. */
   public async logout(): Promise<void> {
     await this.supabase.auth.signOut();
   }
@@ -74,6 +90,7 @@ export class AuthService {
     return Boolean(data);
   }
 
+  /** Restaura la sesión guardada y se suscribe a los cambios de autenticación. */
   private async initialize(): Promise<void> {
     const { data } = await this.supabase.auth.getSession();
     await this.applySession(data.session);
@@ -85,6 +102,7 @@ export class AuthService {
     });
   }
 
+  /** Actualiza la sesión y carga o limpia el perfil asociado. */
   private async applySession(session: Session | null): Promise<void> {
     this._session.set(session);
     if (!session) {
@@ -94,6 +112,7 @@ export class AuthService {
     await this.loadProfile(session.user.id);
   }
 
+  /** Lee la fila de `profiles` del usuario indicado. */
   private async loadProfile(userId: string): Promise<void> {
     const { data, error } = await this.supabase
       .from('profiles')

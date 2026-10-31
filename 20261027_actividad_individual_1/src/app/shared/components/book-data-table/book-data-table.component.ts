@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
 import { IonSearchbar, IonSpinner, IonText } from '@ionic/angular';
 import { Libro } from '../../../core/models/database.models';
 
+/** Columnas por las que se puede ordenar la tabla. */
 export type BookSortKey = 'titulo' | 'autor' | 'categoria' | 'precio' | 'stock';
+/** Sentido de la ordenación. */
 export type SortDirection = 'asc' | 'desc';
 
 /**
@@ -19,8 +21,11 @@ export type SortDirection = 'asc' | 'desc';
   imports: [CurrencyPipe, IonSearchbar, IonSpinner, IonText],
 })
 export class BookDataTableComponent {
+  /** Libros a mostrar. */
   public readonly libros = input<Libro[]>([]);
+  /** Muestra un indicador de carga en lugar de la tabla. */
   public readonly loading = input(false);
+  /** Título accesible de la tabla (`<caption>`). */
   public readonly caption = input('Listado de libros');
 
   /** Se emite al pulsar una fila (clic o teclado). */
@@ -28,10 +33,14 @@ export class BookDataTableComponent {
   /** Se emite con el texto de búsqueda cada vez que cambia. */
   public readonly searchChange = output<string>();
 
+  /** Texto de búsqueda actual. */
   protected readonly term = signal('');
+  /** Columna de ordenación activa. */
   protected readonly sortKey = signal<BookSortKey>('titulo');
+  /** Sentido de ordenación activo. */
   protected readonly sortDir = signal<SortDirection>('asc');
 
+  /** Definición de columnas (clave, texto y alineación). */
   protected readonly columns: { key: BookSortKey; label: string; numeric: boolean }[] = [
     { key: 'titulo', label: 'Título', numeric: false },
     { key: 'autor', label: 'Autor', numeric: false },
@@ -40,6 +49,7 @@ export class BookDataTableComponent {
     { key: 'stock', label: 'Stock', numeric: true },
   ];
 
+  /** Filas filtradas por búsqueda y ordenadas. */
   protected readonly rows = computed(() => {
     const term = this.term().trim().toLowerCase();
     const key = this.sortKey();
@@ -60,12 +70,14 @@ export class BookDataTableComponent {
     });
   });
 
+  /** Actualiza el término de búsqueda y emite `searchChange`. */
   protected onSearch(event: Event): void {
     const value = String((event as CustomEvent).detail.value ?? '');
     this.term.set(value);
     this.searchChange.emit(value);
   }
 
+  /** Ordena por la columna dada; si ya estaba activa, invierte el sentido. */
   protected sortBy(key: BookSortKey): void {
     if (this.sortKey() === key) {
       this.sortDir.update((d) => (d === 'asc' ? 'desc' : 'asc'));
@@ -75,6 +87,7 @@ export class BookDataTableComponent {
     }
   }
 
+  /** Valor de `aria-sort` de una columna. */
   protected ariaSort(key: BookSortKey): 'ascending' | 'descending' | 'none' {
     if (this.sortKey() !== key) return 'none';
     return this.sortDir() === 'asc' ? 'ascending' : 'descending';

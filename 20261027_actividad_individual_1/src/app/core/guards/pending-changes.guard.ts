@@ -5,6 +5,7 @@ import { CanDeactivateFn } from '@angular/router';
  * protegerse de pérdida de datos accidental al navegar fuera de la vista.
  */
 export interface ComponentCanDeactivate {
+  /** Devuelve `true` si se puede abandonar la vista (o una promesa con la decisión). */
   canDeactivate: () => boolean | Promise<boolean>;
 }
 

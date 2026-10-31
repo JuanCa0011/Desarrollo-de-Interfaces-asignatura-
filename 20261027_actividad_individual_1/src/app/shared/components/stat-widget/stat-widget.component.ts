@@ -18,11 +18,17 @@ addIcons({ cashOutline, cubeOutline, libraryOutline, warningOutline });
   imports: [IonIcon],
 })
 export class StatWidgetComponent {
+  /** Etiqueta de la métrica. */
   public readonly label = input.required<string>();
+  /** Valor a destacar. */
   public readonly value = input.required<string | number>();
+  /** Nombre del icono Ionicons (opcional). */
   public readonly icon = input<string>();
+  /** Texto secundario (opcional). */
   public readonly hint = input<string>();
+  /** Color de acento del widget. */
   public readonly color = input<'primary' | 'success' | 'warning' | 'danger'>('primary');
 
+  /** Se emite al activar el widget. */
   public readonly selected = output<void>();
 }

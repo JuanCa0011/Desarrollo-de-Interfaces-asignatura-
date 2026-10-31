@@ -53,9 +53,12 @@ addIcons({
   ],
 })
 export class MainLayoutPage {
+  /** Estado de autenticación; muestra el enlace de administración solo a admins. */
   protected readonly authService = inject(AuthService);
+  /** Router para redirigir al login tras cerrar sesión. */
   private readonly router = inject(Router);
 
+  /** Cierra la sesión en Supabase y navega a `/login`. */
   public async logout(): Promise<void> {
     await this.authService.logout();
     void this.router.navigateByUrl('/login');

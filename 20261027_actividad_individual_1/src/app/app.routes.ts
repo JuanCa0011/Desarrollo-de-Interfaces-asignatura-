@@ -4,6 +4,7 @@ import { guestGuard } from './core/guards/guest.guard';
 import { roleActivateGuard, roleMatchGuard } from './core/guards/role.guard';
 import { pendingChangesGuard } from './core/guards/pending-changes.guard';
 
+/** Rutas principales: login/registro (invitados), shell autenticado con Side Menu, 403 y 404. */
 export const routes: Routes = [
   {
     path: 'login',

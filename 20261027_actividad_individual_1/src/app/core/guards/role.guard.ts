@@ -31,6 +31,7 @@ export const roleMatchGuard = (allowedRoles: readonly UserRole[]): CanMatchFn =>
   };
 };
 
+/** Barrera de vista del RBAC: redirige con `UrlTree` a `/login` o `/forbidden` si el rol no es válido. */
 export const roleActivateGuard = (allowedRoles: readonly UserRole[]): CanActivateFn => {
   return async () => {
     const authService = inject(AuthService);

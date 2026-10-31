@@ -15,6 +15,7 @@ import {
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/theme-toggle.component';
 
+/** Página de inicio de sesión (email y contraseña) contra Supabase Auth. */
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -35,19 +36,26 @@ import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/th
   ],
 })
 export class LoginPage {
+  /** Constructor de formularios reactivos. */
   private readonly fb = inject(FormBuilder);
+  /** Servicio de autenticación. */
   private readonly authService = inject(AuthService);
+  /** Router para redirigir tras el login. */
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
 
+  /** Indica que hay un envío en curso. */
   public readonly submitting = signal(false);
+  /** Mensaje de error a mostrar, o `null`. */
   public readonly errorMessage = signal<string | null>(null);
 
+  /** Formulario reactivo con `email` y `password`. */
   public readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
 
+  /** Valida el formulario, inicia sesión y navega a `returnUrl` (o `/`). */
   public async onSubmit(): Promise<void> {
     if (this.form.invalid || this.submitting()) {
       this.form.markAllAsTouched();
