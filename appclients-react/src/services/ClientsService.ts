@@ -54,7 +54,12 @@ export class ClientsService {
   }
 
   // Elimina un cliente por su id
+  // PASO 3 del flujo de borrado (empieza en el botón "Eliminar" de ClientsPage)
   static async deleteClient(id: number): Promise<void> {
+    // PASO 4: equivale en SQL a  DELETE FROM clients WHERE id = :id
+    //   .from(TABLE) → tabla "clients"
+    //   .delete()    → operación DELETE
+    //   .eq('id', id) → filtro WHERE id = id (sin él se intentaría borrar TODA la tabla)
     const { error } = await supabase.from(TABLE).delete().eq('id', id);
 
     if (error) {

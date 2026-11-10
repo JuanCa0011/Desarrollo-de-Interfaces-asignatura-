@@ -34,12 +34,32 @@ export default function ClientsPage(): React.JSX.Element {
     loadClients();
   });
 
+  /*
+   * ============================================================
+   *  FLUJO PARA ELIMINAR UN CLIENTE (no usa ninguna ruta/URL)
+   * ============================================================
+   *  PASO 1 → Botón "Eliminar" de la tabla (más abajo, en el JSX)
+   *  PASO 2 → handleDelete(client)            (esta función)
+   *  PASO 3 → ClientsService.deleteClient(id) (services/ClientsService.ts)
+   *  PASO 4 → Supabase: DELETE FROM clients WHERE id = :id
+   *  PASO 5 → loadClients() vuelve a pedir la lista
+   *  PASO 6 → setClients() actualiza el estado y React repinta la tabla
+   *
+   *  El id viaja como ARGUMENTO de la función, no en la URL.
+   *  La única ruta paramétrica de la app es /edit-client/:id (editar).
+   * ============================================================
+   */
+  // PASO 2: recibe el cliente de la fila pulsada
   const handleDelete = async (client: Client) => {
+    // Un cliente sin id no está guardado en la BD → no se puede borrar
     if (client.id === undefined) return;
+    // Pide confirmación antes de borrar
     if (!window.confirm(`¿Eliminar a ${client.name}?`)) return;
 
     try {
+      // PASO 3 y 4: llama al servicio, que ejecuta el DELETE en Supabase
       await ClientsService.deleteClient(client.id);
+      // PASO 5 y 6: recarga la lista para que desaparezca de la tabla
       await loadClients();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'No se pudo eliminar el cliente');
@@ -97,6 +117,7 @@ export default function ClientsPage(): React.JSX.Element {
                           >
                             Editar
                           </Link>
+                          {/* PASO 1: al pulsar, se pasa el cliente de esta fila a handleDelete */}
                           <button
                             type="button"
                             className="btn btn-sm btn-danger"
